@@ -1,0 +1,256 @@
+#ifndef _SAG_IDL_
+#define _SAG_IDL_
+
+/*******************************************************************************
+*    SAG Community 
+*    
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Lesser General Public
+*    License as published by the Free Software Foundation; either
+*    version 2.1 of the License, or (at your option) any later version.
+*    
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Lesser General Public License for more details.
+*    
+*    You should have received a copy of the GNU Lesser General Public
+*    License along with this library; if not, write to the Free Software
+*    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+*/
+
+#include <acscomponent.idl>
+#include <Types.idl>
+#include "SYSTEMErr.idl"
+
+#pragma prefix "scada"
+
+
+// @file SAG_MODULE.idl SYSTEMErr SAG IDL file
+
+module SAG_MODULE
+{
+	/** @interface SAG
+	 *  
+	 */
+	interface SAGSupervisor : ACS::ACSComponent
+	{
+		/**
+		 * Start the SAG Supervisor.
+		 * The SAG Supervisor will load all its components
+		 * Raises an exception if called twice.
+		 * @return None
+		 */
+		void start ()
+			raises(SYSTEMErr::SAGAlreadyRunningEx);
+			
+		/**
+		 * Stop the SAG Supervisor.
+		 * The SAG Supervisor will stop all its components
+		 * Raises an exception if called twice.
+		 * @return None
+		 */
+		void stop ()
+			raises(SYSTEMErr::SAGAlreadyStoppedEx);
+			
+		/**
+		 * Startup pipelines components and initialize the pipelines to manage a new run
+		 * SUP-040 When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
+		 * Raises an exception if called twice
+		 * @return None
+		 */
+		void startupPipelinesComp (in TYPES::ObservationRun orun)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Start pipelines data processing
+		 * SUP-050 When a sub-array enters in observing state, the SAG Supervisor shall inform the related SAG pipeline, and new data shall be received.
+		 * Raises an exception if called twice
+		 * @return None
+		 */
+		void startPipelinesDataProcessing (in TYPES::ObservationRun orun)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Update pipelines when Sub-Array change status
+		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
+		 * @return None
+		 */
+		void updatePipelines (in TYPES::ObservationRun orun)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * stop pipelines data processing
+		 * SUP-060 When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an au-tomatic and controlled way.
+		 * Raises exception if the a run is not under execution
+		 * @return None
+		 */
+		void stopPipelinesDataProcessing()
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * stop pipelines supervisor components
+		 * 
+		 * Raises exception if the a run is not under execution
+		 * @return None
+		 */	
+		void stopPipelinesComp ()
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		
+	};
+		
+	// @interface SAG RECO Supervisor
+	
+	 interface SAGReco : ACSComponent
+	{
+
+		/**
+		 * Start the SAG RECO Supervisor.
+		 * The SAG RECO Supervisor will load all its components
+		 * Raises an exception if called twice.
+		 * @param  ObservationRun
+		 * @return None
+		 */
+		void start (in TYPES::ObservationRun orun)
+			raises(SYSTEMErr::SAGAlreadyRunningEx);
+		
+		/**
+		 * Start the Reco data processing.
+		 * Start the data processing with all the pipelines instantiated during the start()
+		 * Raises an exception if called twice.
+		 * 
+		 * @return None
+		 */
+		void startDataProcessing ()
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Stop the Reco data processing.
+		 * Stop the data processing with all the pipelines instantiated during the start()
+		 * Raises an exception if called twice.
+		 * 
+		 * @return None
+		 */
+		 
+		void stopDataProcessing ()
+			raises(SYSTEMErr::SAGGenericEx);
+		
+		// Stop the SAG Reco Supervisor. The SAG Reco Supervisor will stop all its
+		// components Raises an exception if called twice.
+		// @return None
+		void stop ()
+			raises(SYSTEMErr::SAGAlreadyStoppedEx);
+
+		// Start the SAG RECO Supervisor. The SAG RECO Supervisor will load all its
+		// components Raises an exception if called twice.
+		// @return None
+		void start();
+	
+	};
+
+
+	// @interface SAG RECO Supervisor
+	
+	 interface SAGDataQuality : ACSComponent
+	{
+
+		/**
+		 * Start the SAGDataQuality Supervisor.
+		 * The SAGDataQuality Supervisor will load all its components
+		 * Raises an exception if called twice.
+		 * @param  ObservationRun
+		 * @return None
+		 */
+		void start (in TYPES::ObservationRun orun)
+			raises(SYSTEMErr::SAGAlreadyRunningEx);
+			
+		/**
+		 * Start the Data Quality data processing.
+		 * Start the data processing with all the pipelines instantiated during the start()
+		 * Raises an exception if called twice.
+		 * 
+		 * @return None
+		 */
+		void startDataProcessing ()
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Stop the Data Quality data processing.
+		 * Stop the data processing with all the pipelines instantiated during the start()
+		 * Raises an exception if called twice.
+		 * 
+		 * @return None
+		 */
+		void stopDataProcessing ()
+			raises(SYSTEMErr::SAGGenericEx);
+		
+		// Stop the SAG Data Quality Supervisor. The SAG Data Quality Supervisor will stop
+		// all its components Raises an exception if called twice.
+		// @return None
+		void stop ()
+			raises(SYSTEMErr::SAGAlreadyStoppedEx);
+
+		// Start the SAGDataQuality Supervisor. The SAGDataQuality Supervisor will load
+		// all its components Raises an exception if called twice.
+		// @return None
+		void start();
+	
+	};
+
+	// @interface SAG SCI Supervisor
+	
+	 interface SAGSci : ACSComponent
+	{
+
+		/**
+		 * Start the SAGSci Supervisor.
+		 * The SAGSci Supervisor will load all its components
+		 * Raises an exception if called twice.
+		 * @param  ObservationRun
+		 * @return None
+		 */
+		void start (in TYPES::ObservationRun orun)
+			raises(SYSTEMErr::SAGAlreadyRunningEx);
+			
+		/**
+		 * Start the SCI data processing.
+		 * Start the data processing with all the pipelines instantiated during the start()
+		 * Raises an exception if called twice.
+		 * 
+		 * @return None
+		 */
+		void startDataProcessing ()
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Stop the SCI data processing.
+		 * Stop the data processing with all the pipelines instantiated during the start()
+		 * Raises an exception if called twice.
+		 * 
+		 * @return None
+		 */
+		void stopDataProcessing ()
+			raises(SYSTEMErr::SAGGenericEx);
+		
+		
+		
+		// Stop the SAG Sci Supervisor. The SAG Sci Supervisor will stop all its
+		// components Raises an exception if called twice.
+		// @return None
+		void stop ()
+			raises(SYSTEMErr::SAGAlreadyStoppedEx);
+
+		// Start the SAGSci Supervisor. The SAGSci Supervisor will load all its components
+		// Raises an exception if called twice.
+		// @return None
+		void start();
+	
+	};
+
+
+
+};
+
+#endif
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Alma/ACSError" xsi:schemaLocation="Alma/ACSError ACSError.xsd" name="SAGErr" type="900908" _prefix="scada">
+        <ErrorCode name="SAGRecoAlreadyStarted" 
+                   shortDescription="SAGReco Already Started" 
+                   description="Trying to start the SAGReco component, failed. It is already running."/>
+        
+</Type>

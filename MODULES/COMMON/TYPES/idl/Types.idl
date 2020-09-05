@@ -1,0 +1,107 @@
+#ifndef _TYPES_IDL_
+#define _TYPES_IDL_
+
+/*******************************************************************************
+*    ACS Community - https://github.com/ACS-Community/ACS-Workshop
+*    
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Lesser General Public
+*    License as published by the Free Software Foundation; either
+*    version 2.1 of the License, or (at your option) any later version.
+*    
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Lesser General Public License for more details.
+*    
+*    You should have received a copy of the GNU Lesser General Public
+*    License along with this library; if not, write to the Free Software
+*    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+*/
+
+#pragma prefix "scada"
+
+
+/** @file Types.idl
+ *  IDL specification of Mount object for ACS Course
+ *
+ *  There are 4 different interfaces that show the implementation
+ *  of a Mount component with increasing complexity.
+ *  At every step we add new functionality, aligned with what 
+ *  is demonstrated in the course
+ */
+
+module TYPES
+{ 
+    // Image types
+	typedef sequence<octet> ImageType;
+	typedef sequence<ImageType> ImageList;
+
+	// Coordinates type
+	struct Position {
+		double az;
+		double el;
+	};
+
+	// Targets types
+	struct Target {
+		long     tid;
+		Position coordinates;
+		long   expTime;  /* seconds */
+	};
+
+	
+	// Run types
+	struct Run {
+		long runSequenceID; // run sequence ID
+		long type;
+		long status;
+	};
+	
+
+	// ExecutionRun types
+	struct ExecutionRun {
+		long runID; // run sequence ID
+		string tstart; 
+		string tstop;
+		Run executedRun;
+		long status;
+	};
+
+	typedef sequence<Run> RunList;
+
+
+	// Scheduling Block types
+	struct SchedulingBlock {
+		long sbid; // scheduling block ID
+		RunList runs;
+		long status;
+	};
+
+	typedef sequence<SchedulingBlock> SchedulingBlockList;
+
+	// Proposal types
+	struct ObservingProject {
+		long opid; // proposal ID
+		Target obsTarget;
+		long status; // 0 submitted, 2 approved, 3 scheduled, 4 partial executed, 5 finished
+		SchedulingBlockList schedulingblocks;
+	};
+	
+	typedef sequence<ObservingProject> ObservingProjectList;
+	
+
+	
+	
+
+
+
+
+	
+
+
+
+};
+
+#endif
+

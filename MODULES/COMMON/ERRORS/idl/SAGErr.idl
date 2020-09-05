@@ -1,0 +1,33 @@
+#ifndef  _SAGErr_IDL_
+#define  _SAGErr_IDL_
+
+#include <acserr.idl>
+
+#pragma prefix "scada"
+ 	
+module ACSErr 
+{
+	// type
+	const ACSErr::ACSErrType SAGErr = 900908;
+}; 
+
+module SAGErr
+{
+	 const ACSErr::ErrorCode SAGRecoAlreadyStarted = 0;
+	 
+	 
+
+    // exception for type:
+	exception SAGErrEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+
+	// excptions for codes:
+	exception SAGRecoAlreadyStarted {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+};
+
+#endif
+
