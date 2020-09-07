@@ -71,19 +71,19 @@ module CONSOLE_MODULE
 			
 			
 		/**
-		 * Start all components related to a specific scheduling block
+		 * Start all components related to a specific sub array 
 		 *
 		 * Raises exception if no scheduling block is found in the database.
 		 * @retun void
 		 */
-		void startSBPipesComponents(in long sbid);
+		void startSubArrayManager(in long subArrayID);
 			//raises(SYSTEMErr::SchedulingBlockNotYetReadyEx);
 			
 		/**
-		 * Stop all components related to a specific scheduling block 
+		 * Stop all components related to a specific sub array  
 		 * @return void
 		 */
-		void stopSBPipesComponents(in long sbid);
+		void stopSubArrayManager(in long subArrayID);
 			//raises(SYSTEMErr::NoRunExecutingEx, SYSTEMErr::SystemInManualModeEx, SYSTEMErr::SystemInAutoModeEx);
 		
 		
@@ -92,7 +92,7 @@ module CONSOLE_MODULE
 		 *
 		 *  @return void
 		 */
-		void startSBPipesDataProcessing(in long sbid);
+		void startSubArrayDataProcessing(in long subArrayID);
 			//raises (SYSTEMErr::SystemInAutoModeEx);
 		
 		/**
@@ -100,7 +100,7 @@ module CONSOLE_MODULE
 		 * 
 		 *  @return void
 		 */    
-		void stopSBPipesDataProcessing(in long sbid); 
+		void stopSubArrayDataProcessing(in long subArrayID); 
 			//raises(SYSTEMErr::PositionOutOfLimitsEx, SYSTEMErr::SystemInAutoModeEx);
 
 

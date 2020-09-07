@@ -90,14 +90,14 @@ module TYPES
 	
 	typedef sequence<ObservingProject> ObservingProjectList;
 	
-
 	
+	// Sub array 
+	struct SubArray {
+		long subArrayID; 
+	};
 	
+	typedef sequence<SubArray> SubArray;
 
-
-
-
-	
 
 
 

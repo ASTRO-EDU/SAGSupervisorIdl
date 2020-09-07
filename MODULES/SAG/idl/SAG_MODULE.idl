@@ -59,7 +59,7 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
-		void startSBPipelinesComponents (in long sbid)
+		void startSubArrayComponents (in long subArrayID)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -68,7 +68,7 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
-		void startSBPipelinesDataProcessing (in long sbid)
+		void startSubArrayDataProcessing (in long subArrayID)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -76,7 +76,7 @@ module SAG_MODULE
 		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
 		 * @return None
 		 */
-		void updateSBPipelines (in long sbid)
+		void updateSubArray (in long subArrayID)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -85,7 +85,7 @@ module SAG_MODULE
 		 * Raises exception if the a run is not under execution
 		 * @return None
 		 */
-		void stopSBPipelinesDataProcessing(in long sbid)
+		void stopSubArrayDataProcessing(in long subArrayID)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -94,15 +94,74 @@ module SAG_MODULE
 		 * Raises exception if the a run is not under execution
 		 * @return None
 		 */	
-		void stopSBPipelinesComponents (in long sbid)
+		void stopSubArrayComponents (in long subArrayID)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		
 	};
+
+	/** @interface SAGSubArrayManager
+	 *  
+	 */
+	interface SAGSubArrayManager : ACS::ACSComponent
+	{
+
+		/**
+		 * Start the SAG Sub-Array Manager.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  scheduling block id
+		 * @return None
+		 */
+		void start (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+		
+		/**
+		 * Stop SAG Sub-Array Manager.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  scheduling block id
+		 * @return None
+		 */
+		void stop (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Start Sub Array Data Processing.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  Sub Array Data Type
+		 * @return None
+		 */
+		void startDataProcessing (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+			
+		/**
+		 * Stop Sub Array Data Processing.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  Sub Array Data Type
+		 * @return None
+		 */
+		void stopDataProcessing (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Update Sub-Array status
+		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
+		 * @return None
+		 */
+		void updateSubArray (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+		
+
+	};
+	
 		
 	// @interface SAG RECO Supervisor
 	
-	 interface SAGReco : ACSComponent
+	interface SAGReco : ACSComponent
 	{
 
 		/**
@@ -142,10 +201,7 @@ module SAG_MODULE
 		void stop ()
 			raises(SYSTEMErr::SAGAlreadyStoppedEx);
 
-		// Start the SAG RECO Supervisor. The SAG RECO Supervisor will load all its
-		// components Raises an exception if called twice.
-		// @return None
-		void start();
+	
 	
 	};
 
@@ -191,10 +247,6 @@ module SAG_MODULE
 		void stop ()
 			raises(SYSTEMErr::SAGAlreadyStoppedEx);
 
-		// Start the SAGDataQuality Supervisor. The SAGDataQuality Supervisor will load
-		// all its components Raises an exception if called twice.
-		// @return None
-		void start();
 	
 	};
 
@@ -233,18 +285,13 @@ module SAG_MODULE
 		void stopDataProcessing ()
 			raises(SYSTEMErr::SAGGenericEx);
 		
-		
-		
+	
 		// Stop the SAG Sci Supervisor. The SAG Sci Supervisor will stop all its
 		// components Raises an exception if called twice.
 		// @return None
 		void stop ()
 			raises(SYSTEMErr::SAGAlreadyStoppedEx);
 
-		// Start the SAGSci Supervisor. The SAGSci Supervisor will load all its components
-		// Raises an exception if called twice.
-		// @return None
-		void start();
 	
 	};
 
