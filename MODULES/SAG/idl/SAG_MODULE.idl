@@ -23,7 +23,7 @@
 #include <Types.idl>
 #include "SYSTEMErr.idl"
 
-#pragma prefix "scada"
+#pragma prefix "sag"
 
 
 // @file SAG_MODULE.idl SYSTEMErr SAG IDL file
@@ -59,7 +59,7 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
-		void startupPipelinesComp (in TYPES::ObservationRun orun)
+		void startSBPipelinesComponents (in long sbid)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -68,7 +68,7 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
-		void startPipelinesDataProcessing (in TYPES::ObservationRun orun)
+		void startSBPipelinesDataProcessing (in long sbid)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -76,7 +76,7 @@ module SAG_MODULE
 		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
 		 * @return None
 		 */
-		void updatePipelines (in TYPES::ObservationRun orun)
+		void updateSBPipelines (in long sbid)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -85,7 +85,7 @@ module SAG_MODULE
 		 * Raises exception if the a run is not under execution
 		 * @return None
 		 */
-		void stopPipelinesDataProcessing()
+		void stopSBPipelinesDataProcessing(in long sbid)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		/**
@@ -94,7 +94,7 @@ module SAG_MODULE
 		 * Raises exception if the a run is not under execution
 		 * @return None
 		 */	
-		void stopPipelinesComp ()
+		void stopSBPipelinesComponents (in long sbid)
 			raises(SYSTEMErr::SAGGenericEx);
 			
 		

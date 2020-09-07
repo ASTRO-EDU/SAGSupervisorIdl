@@ -23,7 +23,7 @@
 #include <Types.idl>
 //#include "SYSTEMErr.idl"
 
-#pragma prefix "scada"
+#pragma prefix "sag"
 
 
 /** 
@@ -58,66 +58,52 @@ module CONSOLE_MODULE
 		long getMode();
 		
 		/**
-		 * Start Master Controller Supervisor and all related components (if present)
+		 * Start SAG Supervisor and all related components (if present)
 		 */
-		void startMasterController();
+		void startSAGSupervisor();
 			//raises (SYSTEMErr::SystemInManualModeEx, SYSTEMErr::MasterControllerAlreadyRunningEx);
 			
 		/**
-		 * Stop Master Controller
+		 * Stop SAG Supervisor
 		 */
-		void stopMasterController();
+		void stopSAGSupervisor();
 			//raises (SYSTEMErr::SystemInManualModeEx, SYSTEMErr::MasterControllerAlreadyStoppedEx);
 			
 			
 		/**
-		 * Returns the status of the loaded scheduling block. This is the method used by the console
+		 * Start all components related to a specific scheduling block
 		 *
 		 * Raises exception if no scheduling block is found in the database.
-		 * @retun scheduling block ID
+		 * @retun void
 		 */
-		long loadSchedulingBlock(in long sbid);
+		void startSBPipesComponents(in long sbid);
 			//raises(SYSTEMErr::SchedulingBlockNotYetReadyEx);
 			
 		/**
-		 * Stop the current run under execution. 
-		 * @return the status of the stopped run
+		 * Stop all components related to a specific scheduling block 
+		 * @return void
 		 */
-		long stopCurrentRun();
+		void stopSBPipesComponents(in long sbid);
 			//raises(SYSTEMErr::NoRunExecutingEx, SYSTEMErr::SystemInManualModeEx, SYSTEMErr::SystemInAutoModeEx);
 		
+		
 		/**
-		 * Set the camera on.
+		 * Start the data processing related to a scheduling block
 		 *
 		 *  @return void
 		 */
-		void cameraOn(in long telescopeID);
+		void startSBPipesDataProcessing(in long sbid);
 			//raises (SYSTEMErr::SystemInAutoModeEx);
 		
 		/**
-		 * Set the camera off.
-		 *
-		 *  @return void
-		 */
-		void cameraOff(in long telescopeID);
-			//raises (SYSTEMErr::SystemInAutoModeEx);
-		
-		/**
-		 * Move telescope in synchronous mode. Raises an exception if the
-		 * requested position is out of limits.
-		 *
-		 *  @coordinates az, el coordinates
+		 * Stop the data processing related to a scheduling block
+		 * 
 		 *  @return void
 		 */    
-		void moveTelescope(in TYPES::Position coordinates); 
+		void stopSBPipesDataProcessing(in long sbid); 
 			//raises(SYSTEMErr::PositionOutOfLimitsEx, SYSTEMErr::SystemInAutoModeEx);
 
-		/**
-		 * Current telescope position. 
-		 *  @param telescope ID
-		 *  @return Telescope position
-		 */    
-		TYPES::Position getTelescopePosition(in long telescopeID);
+
 
 	};
 };
