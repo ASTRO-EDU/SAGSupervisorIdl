@@ -133,7 +133,8 @@ CDB_SCHEMAS =
 # 
 # IDL Files and flags
 # 
-IDL_FILES =
+IDL_FILES = SAG_MODULE
+SAG_MODULEStubs_LIBS = acscomponentStubs TypesStubs SAGErr
 TAO_IDLFLAGS =
 USER_IDL =
 #
@@ -154,7 +155,7 @@ XML_IDL=
 #
 # Java Component Helper Classes generation on/off
 #
-COMPONENT_HELPERS=
+COMPONENT_HELPERS=off
 #
 # Java Entity Classes generation on/off
 #

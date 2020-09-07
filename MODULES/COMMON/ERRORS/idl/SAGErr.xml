@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Alma/ACSError" xsi:schemaLocation="Alma/ACSError ACSError.xsd" name="SAGErr" type="900908" _prefix="scada">
-        <ErrorCode name="SAGRecoAlreadyStarted" 
-                   shortDescription="SAGReco Already Started" 
-                   description="Trying to start the SAGReco component, failed. It is already running."/>
+<Type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Alma/ACSError" xsi:schemaLocation="Alma/ACSError ACSError.xsd" name="SAGErr" type="900000" _prefix="sag">
         
+        <!-- Generic -->
+        <ErrorCode name="SAGGeneric" 
+                   shortDescription="SAG generic exception" 
+                   description="SAG raised a generic exception."/>
+
+
+        <!-- SAGSupervisor -->
+
+        <ErrorCode name="SAGSupervisorAlreadyStarted" 
+                   shortDescription="SAGSupervisor is already running" 
+                   description="Trying to start the SAGSupervisor component, failed. It is already running."/>
+
+        <ErrorCode name="SAGSupervisorAlreadyStopped" 
+                   shortDescription="SAGSupervisor is already stopped" 
+                   description="Trying to stop the SAGSupervisor component, failed. It is not running."/>
+
+
+
+        <!-- SAGReco -->
+
+        <ErrorCode name="SAGRecoAlreadyStarted" 
+                   shortDescription="SAGReco is already running" 
+                   description="Trying to start the SAGReco component, failed. It is already running."/>
+
+        <ErrorCode name="SAGRecoAlreadyStopped" 
+                shortDescription="SAGReco is already stopped" 
+                description="Trying to stop the SAGReco component, failed. It is not running."/>
+
+        <!-- SAGDataQuality -->
+
+        <ErrorCode name="SAGDataQualityAlreadyStarted" 
+                   shortDescription="SAGDataQuality is already running" 
+                   description="Trying to start the SAGDataQuality component, failed. It is already running."/>
+
+        <ErrorCode name="SAGDataQualityAlreadyStopped" 
+                   shortDescription="SAGDataQuality is already stopped" 
+                   description="Trying to stop the SAGDataQuality component, failed. It is not running."/>
+
+        <!-- SAGSci -->
+
+        <ErrorCode name="SAGSciAlreadyStarted" 
+                   shortDescription="SAGSci is already running" 
+                   description="Trying to start the SAGSci component, failed. It is already running."/>
+
+        <ErrorCode name="SAGSciAlreadyStopped" 
+                   shortDescription="SAGSci is already stopped" 
+                   description="Trying to stop the SAGSci component, failed. It is not running."/>
+
+
 </Type>

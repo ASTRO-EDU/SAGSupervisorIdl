@@ -155,7 +155,7 @@ XML_IDL=
 #
 # Java Component Helper Classes generation on/off
 #
-COMPONENT_HELPERS=on
+COMPONENT_HELPERS=off
 #
 # Java Entity Classes generation on/off
 #

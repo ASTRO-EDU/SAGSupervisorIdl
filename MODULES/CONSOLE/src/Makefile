@@ -134,7 +134,7 @@ CDB_SCHEMAS =
 # IDL Files and flags
 # 
 IDL_FILES = CONSOLE_MODULE
-CONSOLE_MODULEStubs_LIBS = acscomponentStubs TypesStubs
+CONSOLE_MODULEStubs_LIBS = acscomponentStubs TypesStubs CONSOLEErr
 TAO_IDLFLAGS =
 USER_IDL =
 #
