@@ -53,16 +53,13 @@ module CONSOLE_MODULE
 		 * Raises exception if no scheduling block is found in the database.
 		 * @retun void
 		 */
-
-		//void startSubArrayManager(in long subArrayID);
-			//raises(SYSTEMErr::SchedulingBlockNotYetReadyEx);
+		void startSubArrayManager(in long subArrayID);
 			
 		/**
 		 * Stop all components related to a specific sub array  
 		 * @return void
 		 */
-		//void stopSubArrayManager(in long subArrayID);
-			//raises(SYSTEMErr::NoRunExecutingEx, SYSTEMErr::SystemInManualModeEx, SYSTEMErr::SystemInAutoModeEx);
+		void stopSubArrayManager(in long subArrayID);
 		
 		
 		/**
@@ -70,16 +67,14 @@ module CONSOLE_MODULE
 		 *
 		 *  @return void
 		 */
-		//void startSubArrayDataProcessing(in long subArrayID);
-			//raises (SYSTEMErr::SystemInAutoModeEx);
+		void startSubArrayDataProcessing(in long subArrayID);
 		
 		/**
 		 * Stop the data processing related to a scheduling block
 		 * 
 		 *  @return void
 		 */    
-		//void stopSubArrayDataProcessing(in long subArrayID); 
-			//raises(SYSTEMErr::PositionOutOfLimitsEx, SYSTEMErr::SystemInAutoModeEx);
+		void stopSubArrayDataProcessing(in long subArrayID); 
 
 	};
 };

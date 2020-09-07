@@ -23,72 +23,19 @@
 
 module TYPES
 { 
-	typedef sequence<octet> ImageType;
-	typedef sequence<ImageType> ImageList;
-
-	struct Position {
-		double az;
-		double el;
-	};
-
-	struct Target {
-		long     tid;
-		Position coordinates;
-		long   expTime;  /* seconds */
-	};	
 
 	struct ObservationRun {
 		long runSequenceID;
 		long type;
 		long status;
 	};
-
-	struct Run {
-		long runSequenceID;
-		long type;
-		long status;
-	};
 	
-	struct ExecutionRun {
-		long runID; 
-		string tstart; 
-		string tstop;
-		Run executedRun;
-		long status;
-	};
-
-	typedef sequence<Run> RunList;
-
-	struct SchedulingBlock {
-		long sbid; 
-		RunList runs;
-		long status;
-	};
-
-	typedef sequence<SchedulingBlock> SchedulingBlockList;
-
-	struct ObservingProject {
-		long opid; 
-		Target obsTarget;
-		long status; // 0 submitted, 2 approved, 3 scheduled, 4 partial executed, 5 finished
-		SchedulingBlockList schedulingblocks;
-	};
-	
-	typedef sequence<ObservingProject> ObservingProjectList;
-<<<<<<< HEAD
-=======
-	
-	
-	// Sub array 
 	struct SubArray {
 		long subArrayID; 
+		ObservationRun obsrun;
 	};
 	
-	typedef sequence<SubArray> SubArray;
-
-
-
->>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
+	typedef sequence<SubArray> SubArrayList;
 
 };
 
