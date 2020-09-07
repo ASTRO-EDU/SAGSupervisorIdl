@@ -54,8 +54,13 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
+<<<<<<< HEAD
 		void startSBPipelinesComponents (in long sbid)
 			raises(SAGErr::SAGGenericEx);
+=======
+		void startSubArrayComponents (in long subArrayID)
+			raises(SYSTEMErr::SAGGenericEx);
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 			
 		/**
 		 * Start pipelines data processing
@@ -63,16 +68,26 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
+<<<<<<< HEAD
 		void startSBPipelinesDataProcessing (in long sbid)
 			raises(SAGErr::SAGGenericEx);
+=======
+		void startSubArrayDataProcessing (in long subArrayID)
+			raises(SYSTEMErr::SAGGenericEx);
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 			
 		/**
 		 * Update pipelines when Sub-Array change status
 		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
 		 * @return None
 		 */
+<<<<<<< HEAD
 		void updateSBPipelines (in long sbid)
 			raises(SAGErr::SAGGenericEx);
+=======
+		void updateSubArray (in long subArrayID)
+			raises(SYSTEMErr::SAGGenericEx);
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 			
 		/**
 		 * stop pipelines data processing
@@ -80,8 +95,13 @@ module SAG_MODULE
 		 * Raises exception if the a run is not under execution
 		 * @return None
 		 */
+<<<<<<< HEAD
 		void stopSBPipelinesDataProcessing(in long sbid)
 			raises(SAGErr::SAGGenericEx);
+=======
+		void stopSubArrayDataProcessing(in long subArrayID)
+			raises(SYSTEMErr::SAGGenericEx);
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 			
 		/**
 		 * stop pipelines supervisor components
@@ -89,14 +109,82 @@ module SAG_MODULE
 		 * Raises exception if the a run is not under execution
 		 * @return None
 		 */	
+<<<<<<< HEAD
 		void stopSBPipelinesComponents (in long sbid)
 			raises(SAGErr::SAGGenericEx);
+=======
+		void stopSubArrayComponents (in long subArrayID)
+			raises(SYSTEMErr::SAGGenericEx);
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 			
 		
 	};
+
+	/** @interface SAGSubArrayManager
+	 *  
+	 */
+	interface SAGSubArrayManager : ACS::ACSComponent
+	{
+
+		/**
+		 * Start the SAG Sub-Array Manager.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  scheduling block id
+		 * @return None
+		 */
+		void start (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+		
+		/**
+		 * Stop SAG Sub-Array Manager.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  scheduling block id
+		 * @return None
+		 */
+		void stop (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Start Sub Array Data Processing.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  Sub Array Data Type
+		 * @return None
+		 */
+		void startDataProcessing (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+			
+		/**
+		 * Stop Sub Array Data Processing.
+		 * 
+		 * Raises an exception if called twice.
+		 * @param  Sub Array Data Type
+		 * @return None
+		 */
+		void stopDataProcessing (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+			
+		/**
+		 * Update Sub-Array status
+		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
+		 * @return None
+		 */
+		void updateSubArray (in TYPES::SubArray subArray)
+			raises(SYSTEMErr::SAGGenericEx);
+		
+
+	};
+	
 		
 	
+<<<<<<< HEAD
 	interface SAGReco : ACS::ACSComponent
+=======
+	interface SAGReco : ACSComponent
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 	{
 
 		/**
@@ -134,8 +222,21 @@ module SAG_MODULE
 		 */
 		 
 		void stopDataProcessing ()
+<<<<<<< HEAD
 			raises(SAGErr::SAGGenericEx);
 			
+=======
+			raises(SYSTEMErr::SAGGenericEx);
+		
+		// Stop the SAG Reco Supervisor. The SAG Reco Supervisor will stop all its
+		// components Raises an exception if called twice.
+		// @return None
+		void stop ()
+			raises(SYSTEMErr::SAGAlreadyStoppedEx);
+
+	
+	
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 	};
 
 	
@@ -176,8 +277,19 @@ module SAG_MODULE
 		 * @return None
 		 */
 		void stopDataProcessing ()
+<<<<<<< HEAD
 			raises(SAGErr::SAGGenericEx);
 	
+=======
+			raises(SYSTEMErr::SAGGenericEx);
+		
+		// Stop the SAG Data Quality Supervisor. The SAG Data Quality Supervisor will stop
+		// all its components Raises an exception if called twice.
+		// @return None
+		void stop ()
+			raises(SYSTEMErr::SAGAlreadyStoppedEx);
+
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 	
 	};
 
@@ -220,8 +332,20 @@ module SAG_MODULE
 		 * @return None
 		 */
 		void stopDataProcessing ()
+<<<<<<< HEAD
 			raises(SAGErr::SAGGenericEx);
 		
+=======
+			raises(SYSTEMErr::SAGGenericEx);
+		
+	
+		// Stop the SAG Sci Supervisor. The SAG Sci Supervisor will stop all its
+		// components Raises an exception if called twice.
+		// @return None
+		void stop ()
+			raises(SYSTEMErr::SAGAlreadyStoppedEx);
+
+>>>>>>> 9e789b5b7283fe3a0b262609669a4165bb871744
 	
 	};
 
