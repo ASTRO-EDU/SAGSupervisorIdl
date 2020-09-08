@@ -61,20 +61,34 @@ module CONSOLE_MODULE
 		 */
 		void stopSubArrayManager(in long subArrayID);
 		
+		/**
+		 * Start all components related to a specific Observing Block 
+		 *
+		 * Raises exception if no scheduling block is found in the database.
+		 * @retun void
+		 */
+		void startOBPipelines(in long subArrayID,in long obID);
+			
+		/**
+		 * Stop all components related to a specific Observing Block
+		 * @return void
+		 */
+		void stopOBPipelines(in long subArrayID,in long obID);
+		
 		
 		/**
-		 * Start the data processing related to a scheduling block
+		 * Start the data processing related to a Observing block
 		 *
 		 *  @return void
 		 */
-		void startSubArrayDataProcessing(in long subArrayID);
+		void startOBDataProcessing(in long subArrayID,in long obID);
 		
 		/**
-		 * Stop the data processing related to a scheduling block
+		 * Stop the data processing related to a Observing block
 		 * 
 		 *  @return void
 		 */    
-		void stopSubArrayDataProcessing(in long subArrayID); 
+		void stopOBDataProcessing(in long subArrayID,in long obID); 
 
 	};
 };

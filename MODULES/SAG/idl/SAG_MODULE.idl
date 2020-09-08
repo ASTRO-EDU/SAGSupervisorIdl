@@ -49,13 +49,39 @@ module SAG_MODULE
 			raises(SAGErr::SAGSupervisorAlreadyStoppedEx);
 			
 		/**
-		 * Startup pipelines components and initialize the pipelines to manage a new run
+		 * Startup SubArray component
 		 * SUP-040 When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
 		 * Raises an exception if called twice
 		 * @return None
 		 */
-		void startSubArrayComponents (in long subArrayID)
+		void startSubArray	(in long subArrayID)
 			raises(SAGErr::SAGGenericEx);
+			
+						
+		/**
+		 * stop sub array component
+		 * 
+		 * Raises exception if the a run is not under execution
+		 * @return None
+		 */	
+		void stopSubArray (in long subArrayID)
+			raises(SAGErr::SAGGenericEx);			
+			
+			
+		/**
+		 * Start all components related to a specific Observation Block 
+		 *
+		 * Raises exception if no scheduling block is found in the database.
+		 * @retun void
+		 */
+		void startOBPipelines(in long subArrayID,in long obID);
+			
+		/**
+		 * Stop all components related to a specific Observation Block
+		 * @return void
+		 */
+		void stopOBPipelines(in long subArrayID,in long obID);
+	
 			
 		/**
 		 * Start pipelines data processing
@@ -63,7 +89,17 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
-		void startSubArrayDataProcessing (in long subArrayID)
+		void startOBDataProcessing (in long subArrayID,in long obID)
+			raises(SAGErr::SAGGenericEx);
+			
+					
+		/**
+		 * stop pipelines data processing for an Observing Block
+		 * SUP-060 When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an au-tomatic and controlled way.
+		 * Raises exception if the a run is not under execution
+		 * @return None
+		 */
+		void stopOBDataProcessing(in long subArrayID,in long obID)
 			raises(SAGErr::SAGGenericEx);
 			
 		/**
@@ -73,24 +109,8 @@ module SAG_MODULE
 		 */
 		void updateSubArray (in long subArrayID)
 			raises(SAGErr::SAGGenericEx);
-			
-		/**
-		 * stop pipelines data processing
-		 * SUP-060 When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an au-tomatic and controlled way.
-		 * Raises exception if the a run is not under execution
-		 * @return None
-		 */
-		void stopSubArrayDataProcessing(in long subArrayID)
-			raises(SAGErr::SAGGenericEx);
-			
-		/**
-		 * stop pipelines supervisor components
-		 * 
-		 * Raises exception if the a run is not under execution
-		 * @return None
-		 */	
-		void stopSubArrayComponents (in long subArrayID)
-			raises(SAGErr::SAGGenericEx);			
+
+
 		
 	};
 
@@ -122,24 +142,39 @@ module SAG_MODULE
 			raises(SAGErr::SAGGenericEx);
 			
 		/**
-		 * Start Sub Array Data Processing.
+		 * Start all components related to a specific Observation Block 
+		 *
+		 * Raises exception if no scheduling block is found in the database.
+		 * @retun void
+		 */
+		void startOBPipelines(in long obID);
+			
+		/**
+		 * Stop all components related to a specific Observation Block
+		 * @return void
+		 */
+		void stopOBPipelines(in long obID);
+		
+			
+		/**
+		 * Start Sub Array Data Processing  for an Observation Block.
 		 * 
 		 * Raises an exception if called twice.
 		 * @param  Sub Array Data Type
 		 * @return None
 		 */
-		void startDataProcessing (in TYPES::SubArray sa)
+		void startOBDataProcessing (in long obID)
 			raises(SAGErr::SAGGenericEx);
 			
 			
 		/**
-		 * Stop Sub Array Data Processing.
+		 * Stop Sub Array Data Processing for an Observation Block.
 		 * 
 		 * Raises an exception if called twice.
 		 * @param  Sub Array Data Type
 		 * @return None
 		 */
-		void stopDataProcessing (in TYPES::SubArray sa)
+		void stopOBDataProcessing (in long obID)
 			raises(SAGErr::SAGGenericEx);
 			
 		/**
@@ -164,7 +199,7 @@ module SAG_MODULE
 		 * @param  ObservationRun
 		 * @return None
 		 */
-		void start (in TYPES::ObservationRun orun)
+		void start (in TYPES::ObservationBlock ob)
 			raises(SAGErr::SAGRecoAlreadyStartedEx);
 
 		// Stop the SAG Reco Supervisor. The SAG Reco Supervisor will stop all its
@@ -205,7 +240,7 @@ module SAG_MODULE
 		 * @param  ObservationRun
 		 * @return None
 		 */
-		void start (in TYPES::ObservationRun orun)
+		void start (in TYPES::ObservationBlock ob)
 			raises(SAGErr::SAGDataQualityAlreadyStartedEx);
 
 		// Stop the SAG Data Quality Supervisor. The SAG Data Quality Supervisor will stop
@@ -250,7 +285,7 @@ module SAG_MODULE
 		 * @param  ObservationRun
 		 * @return None
 		 */
-		void start (in TYPES::ObservationRun orun)
+		void start (in TYPES::ObservationBlock ob)
 			raises(SAGErr::SAGSciAlreadyStartedEx);
 
 		// Stop the SAG Sci Supervisor. The SAG Sci Supervisor will stop all its
