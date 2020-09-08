@@ -128,7 +128,7 @@ module SAG_MODULE
 		 * @param  scheduling block id
 		 * @return None
 		 */
-		void start (in TYPES::SubArray sa)
+		void start (in long subArrayID)
 			raises(SAGErr::SAGGenericEx);
 		
 		/**
@@ -138,7 +138,7 @@ module SAG_MODULE
 		 * @param  scheduling block id
 		 * @return None
 		 */
-		void stop (in TYPES::SubArray sa)
+		void stop (in long subArrayID)
 			raises(SAGErr::SAGGenericEx);
 			
 		/**
