@@ -24,20 +24,49 @@
 module TYPES
 { 
 
-	struct ObservationRun {
-		long runSequenceID;
-		long type;
-		long status;
+	struct Telescope {
+		string type; /* SST, MST, LST */
 	};
-	
-	struct SubArray {
-		long subArrayID; 
-		ObservationRun obsrun;
-	};
-	
-	typedef sequence<SubArray> SubArrayList;
 
+	typedef sequence<Telescope> TelescopeList;
+
+	struct SubArray {
+		long subArrayId;
+		TelescopeList sbTelescopeList;
+	};
+
+	struct Coordinates {
+		double az;
+		double el;
+	};
+
+	struct Target {
+		long     tid;
+		Coordinates tCoordinates;
+		long   expTime;  /* seconds */
+	};
+
+	
+	struct ObservationBlock {
+		double plannedDuration;
+		double scheduledStartTime;
+		double actualStartTime;
+		string id;
+		Target obTarget;
+		double executeDuration;
+	};
+
+	typedef sequence<ObservationBlock> ObservationBlockList;
+
+	struct SchedulingBlock {
+		string sBid;
+		string proposalId;
+		SubArray sbSubArray;
+		ObservationBlockList sbObservationBlockList;
+	};
 };
+
+
 
 #endif
 
