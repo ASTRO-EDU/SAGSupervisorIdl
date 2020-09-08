@@ -54,7 +54,7 @@ module SAG_MODULE
 		 * Raises an exception if called twice
 		 * @return None
 		 */
-		void startSubArray	(in long subArrayID)
+		void startSubArrayManager	(in long subArrayID)
 			raises(SAGErr::SAGGenericEx);
 			
 						
@@ -64,7 +64,7 @@ module SAG_MODULE
 		 * Raises exception if the a run is not under execution
 		 * @return None
 		 */	
-		void stopSubArray (in long subArrayID)
+		void stopSubArrayManager (in long subArrayID)
 			raises(SAGErr::SAGGenericEx);			
 			
 			
