@@ -182,7 +182,7 @@ module SAG_MODULE
 		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
 		 * @return None
 		 */
-		void updateSubArray(in TYPES::SubArray sa)
+		void updateSubArray()
 			raises(SAGErr::SAGGenericEx);
 		
 
@@ -199,7 +199,7 @@ module SAG_MODULE
 		 * @param  ObservationRun
 		 * @return None
 		 */
-		void start (in TYPES::ObservationBlock ob)
+		void start (in long obID)
 			raises(SAGErr::SAGRecoAlreadyStartedEx);
 
 		// Stop the SAG Reco Supervisor. The SAG Reco Supervisor will stop all its
@@ -240,7 +240,7 @@ module SAG_MODULE
 		 * @param  ObservationRun
 		 * @return None
 		 */
-		void start (in TYPES::ObservationBlock ob)
+		void start (in long obID)
 			raises(SAGErr::SAGDataQualityAlreadyStartedEx);
 
 		// Stop the SAG Data Quality Supervisor. The SAG Data Quality Supervisor will stop
@@ -285,7 +285,7 @@ module SAG_MODULE
 		 * @param  ObservationRun
 		 * @return None
 		 */
-		void start (in TYPES::ObservationBlock ob)
+		void start (in long obID)
 			raises(SAGErr::SAGSciAlreadyStartedEx);
 
 		// Stop the SAG Sci Supervisor. The SAG Sci Supervisor will stop all its
