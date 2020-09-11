@@ -8,7 +8,7 @@
 #
 # who       when      what
 # --------  --------  ----------------------------------------------
-# almamgr  17/08/20  created
+# almamgr  08/09/20  created
 #
 
 # ALMA - Atacama Large Millimeter Array
@@ -133,8 +133,8 @@ CDB_SCHEMAS =
 # 
 # IDL Files and flags
 # 
-IDL_FILES = CONSOLE_MODULE
-CONSOLE_MODULEStubs_LIBS = acscomponentStubs TypesStubs CONSOLEErr UTILITYErr
+IDL_FILES = Utility
+
 TAO_IDLFLAGS =
 USER_IDL =
 #
@@ -155,7 +155,7 @@ XML_IDL=
 #
 # Java Component Helper Classes generation on/off
 #
-COMPONENT_HELPER=on
+COMPONENT_HELPERS=
 #
 # Java Entity Classes generation on/off
 #

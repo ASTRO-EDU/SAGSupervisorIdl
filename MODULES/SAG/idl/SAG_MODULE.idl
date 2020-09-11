@@ -121,10 +121,6 @@ module SAG_MODULE
 		
 	};
 
-
-	/** @interface SAGSubArrayManager
-	 *  
-	 */
 	interface SAGSubArrayManager : ACS::ACSComponent
 	{
 
@@ -194,7 +190,6 @@ module SAG_MODULE
 		
 
 	};
-	
 		
 	interface SAGReco : ACS::ACSComponent
 	{
@@ -237,6 +232,7 @@ module SAG_MODULE
 			raises(SAGErr::SAGGenericEx);
 			
 	};
+
 	interface SAGDataQuality : ACS::ACSComponent
 	{
 
@@ -278,10 +274,6 @@ module SAG_MODULE
 			raises(SAGErr::SAGGenericEx);
 
 	};
-
-
-
-	// @interface SAG SCI Supervisor
 	
 	 interface SAGSci : ACS::ACSComponent
 	{
