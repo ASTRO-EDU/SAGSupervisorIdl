@@ -32,7 +32,7 @@ module SAG_MODULE
 	{
 		/**
 		 * Start the SAG Supervisor.
-		 * The SAG Supervisor will load all its components
+		 * 
 		 * Raises an exception if called twice.
 		 * @return None
 		 */
@@ -41,7 +41,7 @@ module SAG_MODULE
 			
 		/**
 		 * Stop the SAG Supervisor.
-		 * The SAG Supervisor will stop all its components
+		 * 
 		 * Raises an exception if called twice.
 		 * @return None
 		 */
@@ -51,7 +51,9 @@ module SAG_MODULE
 		/**
 		 * Startup SubArray component
 		 * SUP-040 When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
-		 * Raises an exception if called twice
+		 * The SAGSupervisor receives the command to start the SubArrayManager for a specific subArrayID. 
+		 * The SAGSubArray component is started by the SAGSupervisor
+		 * Raises exception if if no Sub Array is found in the database.
 		 * @return None
 		 */
 		void startSubArrayManager	(in long subArrayID)
@@ -60,8 +62,9 @@ module SAG_MODULE
 						
 		/**
 		 * stop sub array component
-		 * 
-		 * Raises exception if the a run is not under execution
+		 * The SAGSupervisor receives the command to stop the SubArrayManager for a specific subArrayID.
+		 * The SAGSubArray component is stopped by the SAGSupervisor
+		 * Raises exception if if no Sub Array is found in the database.
 		 * @return None
 		 */	
 		void stopSubArrayManager (in long subArrayID)
@@ -69,24 +72,27 @@ module SAG_MODULE
 			
 			
 		/**
-		 * Start all components related to a specific Observation Block 
-		 *
-		 * Raises exception if no scheduling block is found in the database.
+		 * Start components for the RECO,SCI,DQ pipelines for a specific SubArray and Observing Block 
+		 * This command is sent from the SAGSupervisor to the SubArrayManager
+		 * Raises exception if no scheduling block or Sub Array are found in the database.
 		 * @retun void
 		 */
 		void startOBPipelines(in long subArrayID,in long obID);
 			
 		/**
-		 * Stop all components related to a specific Observation Block
+		 * Stop components for the RECO,SCI,DQ pipelines for a specific SubArray and Observing Block
+		 * This command is sent from the SAGSupervisor to the SubArrayManager
+		 * Raises exception if no scheduling block or SubArray is found in the database.
 		 * @return void
 		 */
 		void stopOBPipelines(in long subArrayID,in long obID);
 	
 			
 		/**
-		 * Start pipelines data processing
+		 * Start pipelines data processing for an Observing Block of a Sub Array
 		 * SUP-050 When a sub-array enters in observing state, the SAG Supervisor shall inform the related SAG pipeline, and new data shall be received.
-		 * Raises an exception if called twice
+		 * This method ask to the SubArrayManager to start the data procesing for a specific Sub Array and Observing Block
+		 * Raises an exception if called twice or if no Sub Array and Observation Block are found in the database
 		 * @return None
 		 */
 		void startOBDataProcessing (in long subArrayID,in long obID)
@@ -94,9 +100,10 @@ module SAG_MODULE
 			
 					
 		/**
-		 * stop pipelines data processing for an Observing Block
+		 * stop  pipelines data processing for an Observing Block of a Sub Array
 		 * SUP-060 When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an au-tomatic and controlled way.
-		 * Raises exception if the a run is not under execution
+		 * This method ask to the SubArrayManager to stop the data procesing for a specific Sub Array and Observing Block
+		 * Raises an exception if called twice or if no Sub Array and Observation Block are found in the database
 		 * @return None
 		 */
 		void stopOBDataProcessing(in long subArrayID,in long obID)
@@ -196,7 +203,7 @@ module SAG_MODULE
 		 * Start the SAG RECO Supervisor.
 		 * The SAG RECO Supervisor will load all its components
 		 * Raises an exception if called twice.
-		 * @param  ObservationRun
+		 * @param  @param  Observation Block ID
 		 * @return None
 		 */
 		void start (in long obID)
@@ -234,18 +241,19 @@ module SAG_MODULE
 	{
 
 		/**
-		 * Start the SAGDataQuality Supervisor.
-		 * The SAGDataQuality Supervisor will load all its components
+		 * Start the SAGDataQuality component.
+		 * 
 		 * Raises an exception if called twice.
-		 * @param  ObservationRun
+		 * @param  Observation Block ID
 		 * @return None
 		 */
 		void start (in long obID)
 			raises(SAGErr::SAGDataQualityAlreadyStartedEx);
 
-		// Stop the SAG Data Quality Supervisor. The SAG Data Quality Supervisor will stop
-		// all its components Raises an exception if called twice.
-		// @return None
+		/* Stop the SAG Data Quality component.
+		*  Raises an exception if called twice.
+		*  @return None
+		*/
 		void stop ()
 			raises(SAGErr::SAGDataQualityAlreadyStoppedEx);
 		
@@ -279,18 +287,21 @@ module SAG_MODULE
 	{
 
 		/**
-		 * Start the SAGSci Supervisor.
-		 * The SAGSci Supervisor will load all its components
+		 * Start the SAGSci component.
+		 * 
 		 * Raises an exception if called twice.
-		 * @param  ObservationRun
+		 * @param  Observation Block ID
 		 * @return None
 		 */
 		void start (in long obID)
 			raises(SAGErr::SAGSciAlreadyStartedEx);
 
-		// Stop the SAG Sci Supervisor. The SAG Sci Supervisor will stop all its
-		// components Raises an exception if called twice.
-		// @return None
+		/**
+		* Stop the SAGSci component. 
+		* The SAG Sci Supervisor will stop all its
+		* Raises an exception if called twice.
+		* @return None
+		*/
 		void stop ()
 			raises(SAGErr::SAGSciAlreadyStoppedEx);
 						
