@@ -22,6 +22,7 @@
 #include <acscomponent.idl>
 #include <Types.idl>
 #include <CONSOLEErr.idl>
+#include <UTILITYErr.idl>
 
 #pragma prefix "sag"
 
@@ -38,13 +39,13 @@ module CONSOLE_MODULE
 		 * Start SAG Supervisor and all related components (if present)
 		 */
 		void startSAGSupervisor()
-			raises (CONSOLEErr::SAGSupervisorAlreadyRunningEx);
+			raises (CONSOLEErr::SAGSupervisorAlreadyStartedEx, UTILITYErr::ComponentNameNotFoundEx);
 			
 		/**
 		 * Stop SAG Supervisor
 		 */
 		void stopSAGSupervisor()
-			raises (CONSOLEErr::SAGSupervisorIsNotRunningEx);
+			raises (CONSOLEErr::SAGSupervisorAlreadyStoppedEx, UTILITYErr::ComponentNameNotFoundEx);
 			
 			
 		/**

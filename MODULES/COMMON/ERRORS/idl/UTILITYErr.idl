@@ -1,5 +1,5 @@
-#ifndef  _CONSOLEErr_IDL_
-#define  _CONSOLEErr_IDL_
+#ifndef  _UTILITYErr_IDL_
+#define  _UTILITYErr_IDL_
 	
 /*******************************************************************************
 * ALMA - Atacama Large Millimiter Array
@@ -30,30 +30,25 @@
 module ACSErr 
 {
 	// type
-	const ACSErr::ACSErrType CONSOLEErr = 900001;
+	const ACSErr::ACSErrType UTILITYErr = 900002;
 }; // module ACSErr
 
-module CONSOLEErr
+module UTILITYErr
 {
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStarted = 0;
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStopped = 1;
+	 const ACSErr::ErrorCode ComponentNameNotFound = 0;
 	
 	// excption for type:
-	exception CONSOLEErrEx {
+	exception UTILITYErrEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
 	// excptions for codes:
-	exception SAGSupervisorAlreadyStartedEx {
-		ACSErr::ErrorTrace errorTrace;	
-	};
-	
-	exception SAGSupervisorAlreadyStoppedEx {
+	exception ComponentNameNotFoundEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
 	
-}; // module CONSOLEErr
+}; // module UTILITYErr
 
 #endif
 

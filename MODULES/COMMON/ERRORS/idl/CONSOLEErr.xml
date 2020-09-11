@@ -2,11 +2,11 @@
 <Type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Alma/ACSError" xsi:schemaLocation="Alma/ACSError ACSError.xsd" name="CONSOLEErr" type="900001" _prefix="sag">
         
         
-        <ErrorCode name="SAGSupervisorAlreadyRunning" 
+        <ErrorCode name="SAGSupervisorAlreadyStarted" 
                    shortDescription="The SAG supervisor is already running" 
                    description="The SAG supervisor activation has been requested but it is already running."/>
        
-        <ErrorCode name="SAGSupervisorIsNotRunning" 
+        <ErrorCode name="SAGSupervisorAlreadyStopped" 
                    shortDescription="The SAG supervisor is not running" 
                    description="The SAG supervisor deactivation has been requested but it is not running."/>
  
