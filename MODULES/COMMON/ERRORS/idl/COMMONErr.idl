@@ -1,5 +1,5 @@
-#ifndef  _CONSOLEErr_IDL_
-#define  _CONSOLEErr_IDL_
+#ifndef  _COMMONErr_IDL_
+#define  _COMMONErr_IDL_
 	
 /*******************************************************************************
 * ALMA - Atacama Large Millimiter Array
@@ -30,35 +30,25 @@
 module ACSErr 
 {
 	// type
-	const ACSErr::ACSErrType CONSOLEErr = 900001;
+	const ACSErr::ACSErrType COMMONErr = 900000;
 }; // module ACSErr
 
-module CONSOLEErr
+module COMMONErr
 {
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStarted = 0;
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStopped = 1;
-	 const ACSErr::ErrorCode SAGSupervisorIsNotRunning = 2;
+	 const ACSErr::ErrorCode SchedulingBlockIdNotFoundInDatabase = 0;
 	
 	// excption for type:
-	exception CONSOLEErrEx {
+	exception COMMONErrEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
 	// excptions for codes:
-	exception SAGSupervisorAlreadyStartedEx {
-		ACSErr::ErrorTrace errorTrace;	
-	};
-	
-	exception SAGSupervisorAlreadyStoppedEx {
-		ACSErr::ErrorTrace errorTrace;	
-	};
-	
-	exception SAGSupervisorIsNotRunningEx {
+	exception SchedulingBlockIdNotFoundInDatabaseEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
 	
-}; // module CONSOLEErr
+}; // module COMMONErr
 
 #endif
 

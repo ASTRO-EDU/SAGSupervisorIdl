@@ -10,6 +10,8 @@
                    shortDescription="The SAG supervisor is not running" 
                    description="The SAG supervisor deactivation has been requested but it is not running."/>
  
+        <ErrorCode name="SAGSupervisorIsNotRunning" 
+                   shortDescription="The SAG supervisor is not running" 
+                   description="A request has been forwarded to the SAGSupervisor but it is not running."/>
  
-
 </Type>

@@ -22,55 +22,84 @@
 #include <acscomponent.idl>
 #include <Types.idl>
 #include <SAGErr.idl>
+#include <UTILITYErr.idl>
+#include <COMMONErr.idl>
 
 #pragma prefix "sag"
 
+/**
+TODO: UTILITYErr should not be here because it is an "internal" exceptions module.
+*/
 module SAG_MODULE
 {
 
 	interface SAGSupervisor :  ACS::ACSComponent
 	{
 		/**
-		 * TBD.
-		 * 
-		 * Raises an exception if called twice.
-		 * @return None
-		 */
-		void start ()
-			raises(SAGErr::SAGSupervisorAlreadyStartedEx);
+		* TBD.
+		*/
+		void start ();
 			
 		/**
-		 * TBD.
-		 * 
-		 * Raises an exception if called twice.
-		 * @return None
-		 */
-		void stop ()
-			raises(SAGErr::SAGSupervisorAlreadyStoppedEx);
+		* TBD.
+		*/
+		void stop ();
 			
 		/**
-		 * Startup SubArray component
-		 * SUP-040 When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
-		 * The SAGSupervisor receives the command to start the SubArrayManager for a specific subArrayID. 
-		 * The SAGSubArray component is started by the SAGSupervisor
-		 * Raises exception if if no Sub Array is found in the database.
-		 * @return None
-		 */
+		* Startup a SubArrayManager component
+		* SUP-040 When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
+		* The SAGSupervisor receives the command to start the SubArrayManager for a specific subArrayID. 
+		* The SAGSubArray component is started by the SAGSupervisor
+		* @raise SchedulingBlockIdNotFoundInDatabaseEx exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSubArrayManagerAlreadyStarted exception if the SubArrayManager component with id=sbID is already been started.
+		* @return void
+		*/
 		void startSubArrayManager	(in long sbID)
-			raises(SAGErr::SAGGenericEx);
+			raises(
+				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SAGSubArrayManagerAlreadyStartedEx
+			);
 			
 						
 		/**
-		 * stop sub array component
-		 * The SAGSupervisor receives the command to stop the SubArrayManager for a specific subArrayID.
-		 * The SAGSubArray component is stopped by the SAGSupervisor
-		 * Raises exception if if no Sub Array is found in the database.
-		 * @return None
-		 */	
+		* Stop a SubArrayManager component
+		* The SAGSupervisor receives the command to stop the SubArrayManager for a specific subArrayID.
+		* The SAGSubArray component is stopped by the SAGSupervisor
+		* @raise SchedulingBlockIdNotFoundInDatabaseEx exception if no Sub Array is found in the database.
+		* @raise SAGSubArrayManagerAlreadyStopped exception if the SubArrayManager component with id=sbID is already been stopped.
+		* @return void
+		*/	
 		void stopSubArrayManager (in long sbID)
-			raises(SAGErr::SAGGenericEx);			
+			raises(
+				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SAGSubArrayManagerAlreadyStoppedEx
+			);		
 			
-			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		/**
 		 * Start components for the RECO,SCI,DQ pipelines for a specific SubArray and Observing Block 
 		 * This command is sent from the SAGSupervisor to the SubArrayManager
@@ -125,24 +154,14 @@ module SAG_MODULE
 	{
 
 		/**
-		 * TBD.
-		 * 
-		 * Raises an exception if called twice.
-		 * @param  scheduling block id
-		 * @return None
-		 */
-		void start (in long sbID)
-			raises(SAGErr::SAGGenericEx);
-		
+		* TBD.
+		*/
+		void start ();
+
 		/**
-		 * TBD.
-		 * 
-		 * Raises an exception if called twice.
-		 * @param  scheduling block id
-		 * @return None
-		 */
-		void stop (in long sbID)
-			raises(SAGErr::SAGGenericEx);
+		* TBD.
+		*/
+		void stop ();
 			
 		/**
 		 * Start all components related to a specific Scheduling Block 

@@ -30,7 +30,7 @@
 module ACSErr 
 {
 	// type
-	const ACSErr::ACSErrType UTILITYErr = 900002;
+	const ACSErr::ACSErrType UTILITYErr = 900001;
 }; // module ACSErr
 
 module UTILITYErr

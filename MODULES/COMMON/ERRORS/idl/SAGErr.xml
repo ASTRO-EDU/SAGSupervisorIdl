@@ -18,6 +18,16 @@
                    description="Trying to stop the SAGSupervisor component, failed. It is not running."/>
 
 
+        <!-- SAGSubArrayManager -->
+
+        <ErrorCode name="SAGSubArrayManagerAlreadyStarted" 
+                   shortDescription="The SubArrayManager is already running" 
+                   description="Trying to start the SubArrayManager component, failed. It is already running."/>
+
+        <ErrorCode name="SAGSubArrayManagerAlreadyStopped" 
+                   shortDescription="SubArrayManager is already stopped" 
+                   description="Trying to stop the SubArrayManager component, failed. It is not running."/>
+
 
         <!-- SAGReco -->
 

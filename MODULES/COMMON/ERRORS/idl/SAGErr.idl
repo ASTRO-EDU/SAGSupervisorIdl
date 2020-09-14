@@ -25,21 +25,37 @@
  	
 module ACSErr 
 {
-	const ACSErr::ACSErrType SAGErr = 900000;
+	const ACSErr::ACSErrType SAGErr = 900003;
 };
 
+/*
+	This must be changed: if we want to add a new exception to the SAGSupervisor and we want to give it a coerent sequential number, all
+	error codes have to change :(
+*/
 module SAGErr
 {
-	 const ACSErr::ErrorCode SAGGeneric = 0;
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStarted = 1;
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStopped = 2;
-	 const ACSErr::ErrorCode SAGRecoAlreadyStarted = 3;
-	 const ACSErr::ErrorCode SAGRecoAlreadyStopped = 4;
-	 const ACSErr::ErrorCode SAGDataQualityAlreadyStarted = 5;
-	 const ACSErr::ErrorCode SAGDataQualityAlreadyStopped = 6;
-	 const ACSErr::ErrorCode SAGSciAlreadyStarted = 7;
-	 const ACSErr::ErrorCode SAGSciAlreadyStopped = 8;
+	const ACSErr::ErrorCode SAGGeneric = 0;
 	
+	// SAGSupervisor
+	const ACSErr::ErrorCode SAGSupervisorAlreadyStarted = 1;
+	const ACSErr::ErrorCode SAGSupervisorAlreadyStopped = 2;
+
+	// SAGSubArrayManager
+	const ACSErr::ErrorCode SAGSubArrayManagerAlreadyStarted = 3;
+	const ACSErr::ErrorCode SAGSubArrayManagerAlreadyStopped = 4;
+
+	// SAGReco
+	const ACSErr::ErrorCode SAGRecoAlreadyStarted = 5;
+	const ACSErr::ErrorCode SAGRecoAlreadyStopped = 6;
+
+	// SAGDataQuality
+	const ACSErr::ErrorCode SAGDataQualityAlreadyStarted = 7;
+	const ACSErr::ErrorCode SAGDataQualityAlreadyStopped = 8;
+
+	// SAGSci
+	const ACSErr::ErrorCode SAGSciAlreadyStarted = 9;
+	const ACSErr::ErrorCode SAGSciAlreadyStopped = 10;
+
 	exception SAGErrEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
@@ -56,6 +72,15 @@ module SAGErr
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
+	exception SAGSubArrayManagerAlreadyStartedEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+	exception SAGSubArrayManagerAlreadyStoppedEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+
 	exception SAGRecoAlreadyStartedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
