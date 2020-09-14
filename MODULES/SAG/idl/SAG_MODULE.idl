@@ -31,7 +31,7 @@ module SAG_MODULE
 	interface SAGSupervisor :  ACS::ACSComponent
 	{
 		/**
-		 * Start the SAG Supervisor.
+		 * TBD.
 		 * 
 		 * Raises an exception if called twice.
 		 * @return None
@@ -40,7 +40,7 @@ module SAG_MODULE
 			raises(SAGErr::SAGSupervisorAlreadyStartedEx);
 			
 		/**
-		 * Stop the SAG Supervisor.
+		 * TBD.
 		 * 
 		 * Raises an exception if called twice.
 		 * @return None
@@ -56,7 +56,7 @@ module SAG_MODULE
 		 * Raises exception if if no Sub Array is found in the database.
 		 * @return None
 		 */
-		void startSubArrayManager	(in long subArrayID)
+		void startSubArrayManager	(in long sbID)
 			raises(SAGErr::SAGGenericEx);
 			
 						
@@ -67,7 +67,7 @@ module SAG_MODULE
 		 * Raises exception if if no Sub Array is found in the database.
 		 * @return None
 		 */	
-		void stopSubArrayManager (in long subArrayID)
+		void stopSubArrayManager (in long sbID)
 			raises(SAGErr::SAGGenericEx);			
 			
 			
@@ -77,7 +77,7 @@ module SAG_MODULE
 		 * Raises exception if no scheduling block or Sub Array are found in the database.
 		 * @retun void
 		 */
-		void startOBPipelines(in long subArrayID,in long obID);
+		void startPipelines(in long sbID);
 			
 		/**
 		 * Stop components for the RECO,SCI,DQ pipelines for a specific SubArray and Observing Block
@@ -85,28 +85,28 @@ module SAG_MODULE
 		 * Raises exception if no scheduling block or SubArray is found in the database.
 		 * @return void
 		 */
-		void stopOBPipelines(in long subArrayID,in long obID);
+		void stopPipelines(in long sbID);
 	
 			
 		/**
-		 * Start pipelines data processing for an Observing Block of a Sub Array
+		 * Start pipelines data processing for a Scheduling Block
 		 * SUP-050 When a sub-array enters in observing state, the SAG Supervisor shall inform the related SAG pipeline, and new data shall be received.
 		 * This method ask to the SubArrayManager to start the data procesing for a specific Sub Array and Observing Block
 		 * Raises an exception if called twice or if no Sub Array and Observation Block are found in the database
 		 * @return None
 		 */
-		void startOBDataProcessing (in long subArrayID,in long obID)
+		void startDataProcessing (in long sbID)
 			raises(SAGErr::SAGGenericEx);
 			
 					
 		/**
-		 * stop  pipelines data processing for an Observing Block of a Sub Array
+		 * stop  pipelines data processing for a Scheduling Block
 		 * SUP-060 When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an au-tomatic and controlled way.
 		 * This method ask to the SubArrayManager to stop the data procesing for a specific Sub Array and Observing Block
 		 * Raises an exception if called twice or if no Sub Array and Observation Block are found in the database
 		 * @return None
 		 */
-		void stopOBDataProcessing(in long subArrayID,in long obID)
+		void stopDataProcessing(in long sbID)
 			raises(SAGErr::SAGGenericEx);
 			
 		/**
@@ -114,7 +114,7 @@ module SAG_MODULE
 		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
 		 * @return None
 		 */
-		void updateSubArray (in long subArrayID)
+		void updateSubArray (in long sbID)
 			raises(SAGErr::SAGGenericEx);
 
 
@@ -125,59 +125,59 @@ module SAG_MODULE
 	{
 
 		/**
-		 * Start the SAG Sub-Array Manager.
+		 * TBD.
 		 * 
 		 * Raises an exception if called twice.
 		 * @param  scheduling block id
 		 * @return None
 		 */
-		void start (in long subArrayID)
+		void start (in long sbID)
 			raises(SAGErr::SAGGenericEx);
 		
 		/**
-		 * Stop SAG Sub-Array Manager.
+		 * TBD.
 		 * 
 		 * Raises an exception if called twice.
 		 * @param  scheduling block id
 		 * @return None
 		 */
-		void stop (in long subArrayID)
+		void stop (in long sbID)
 			raises(SAGErr::SAGGenericEx);
 			
 		/**
-		 * Start all components related to a specific Observation Block 
+		 * Start all components related to a specific Scheduling Block 
 		 *
 		 * Raises exception if no scheduling block is found in the database.
 		 * @retun void
 		 */
-		void startOBPipelines(in long obID);
+		void startPipelines();
 			
 		/**
-		 * Stop all components related to a specific Observation Block
+		 * Stop all components related to a specific Scheduling Block
 		 * @return void
 		 */
-		void stopOBPipelines(in long obID);
+		void stopPipelines();
 		
 			
 		/**
-		 * Start Sub Array Data Processing  for an Observation Block.
+		 * Start Sub Array Data Processing  for an Scheduling Block.
 		 * 
 		 * Raises an exception if called twice.
 		 * @param  Sub Array Data Type
 		 * @return None
 		 */
-		void startOBDataProcessing (in long obID)
+		void startDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 			
 			
 		/**
-		 * Stop Sub Array Data Processing for an Observation Block.
+		 * Stop Sub Array Data Processing for an Scheduling Block.
 		 * 
 		 * Raises an exception if called twice.
 		 * @param  Sub Array Data Type
 		 * @return None
 		 */
-		void stopOBDataProcessing (in long obID)
+		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 			
 		/**
@@ -198,10 +198,10 @@ module SAG_MODULE
 		 * Start the SAG RECO Supervisor.
 		 * The SAG RECO Supervisor will load all its components
 		 * Raises an exception if called twice.
-		 * @param  @param  Observation Block ID
+		 * @param  @param  Scheduling Block ID
 		 * @return None
 		 */
-		void start (in long obID)
+		void start (in long sbID)
 			raises(SAGErr::SAGRecoAlreadyStartedEx);
 
 		// Stop the SAG Reco Supervisor. The SAG Reco Supervisor will stop all its
@@ -240,10 +240,10 @@ module SAG_MODULE
 		 * Start the SAGDataQuality component.
 		 * 
 		 * Raises an exception if called twice.
-		 * @param  Observation Block ID
+		 * @param  Scheduling Block ID
 		 * @return None
 		 */
-		void start (in long obID)
+		void start (in long sbID)
 			raises(SAGErr::SAGDataQualityAlreadyStartedEx);
 
 		/* Stop the SAG Data Quality component.
@@ -282,10 +282,10 @@ module SAG_MODULE
 		 * Start the SAGSci component.
 		 * 
 		 * Raises an exception if called twice.
-		 * @param  Observation Block ID
+		 * @param  Scheduling Block ID
 		 * @return None
 		 */
-		void start (in long obID)
+		void start (in long sbID)
 			raises(SAGErr::SAGSciAlreadyStartedEx);
 
 		/**
