@@ -87,57 +87,46 @@ module CONSOLE_MODULE
 			);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 		/**
 		* Start all components related to a specific Observing Block 
-		* @raise SchedulingBlockIdNotFoundInDatabaseEx exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSupervisorIsNotRunning if the SAGSupervisor is not running.
 		* @retun void
 		*/
 		void startPipelines(in long sbID)
-			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx
+			raises (
+				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);
-			
+
 		/**
 		* Stop all components related to a specific Scheduling Block
-		* @raise SchedulingBlockIdNotFoundInDatabaseEx exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSupervisorIsNotRunning exception if no scheduling block with id=sbID is found in the database.
 		* @return void
 		*/
 		void stopPipelines(in long sbID)
-			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx
+			raises (
+				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);
-		
+
+	
 		
 		/**
 		* Start the data processing related to a Scheduling block
-		* @raise SchedulingBlockIdNotFoundInDatabaseEx exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSupervisorIsNotRunning exception if no scheduling block with id=sbID is found in the database.
 		* @return void
 		*/
 		void startDataProcessing(in long sbID)
-			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx
+			raises (
+				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);
 		
 		/**
 		* Stop the data processing related to a Scheduling block
-		* @raise SchedulingBlockIdNotFoundInDatabaseEx exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSupervisorIsNotRunning exception if no scheduling block with id=sbID is found in the database.
 		* @return void
 		*/    
 		void stopDataProcessing(in long sbID)
-			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx
+			raises (
+				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);
 
 	};

@@ -28,6 +28,16 @@
                    shortDescription="SubArrayManager is already stopped" 
                    description="Trying to stop the SubArrayManager component, failed. It is not running."/>
 
+        <ErrorCode name="SAGSubArrayManagerIsNotRunning" 
+                   shortDescription="SubArrayManager is not running" 
+                   description="Trying to forward a request to a specific SubArray Manager but it is not running."/>
+
+        <ErrorCode name="NoObservingBlocksAvailable" 
+                   shortDescription="No more observing blocks are available" 
+                   description="Trying to start pipelines for an observing block but no more observing blocks are available."/>
+
+
+
 
         <!-- SAGReco -->
 
