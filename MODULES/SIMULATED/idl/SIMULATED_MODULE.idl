@@ -1,0 +1,25 @@
+#ifndef _SIMULATED_MODULE_IDL_
+#define _SIMULATED_MODULE_IDL_
+
+#include <acscomponent.idl>
+#include <Types.idl>
+
+#pragma prefix "sag"
+ 
+module SIMULATED_MODULE
+{
+    interface SimDatabase : ACS::ACSComponent {
+
+        /** 
+        * 
+        *
+        * @param 
+        * @raise 
+        * @return 
+        */        
+        long getSubArrayIDFromSB(in long sbID);
+
+    };   
+};
+ 
+#endif

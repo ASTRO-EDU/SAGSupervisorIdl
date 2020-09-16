@@ -23,7 +23,6 @@
 #include <Types.idl>
 #include <SAGErr.idl>
 #include <UTILITYErr.idl>
-#include <COMMONErr.idl>
 
 #pragma prefix "sag"
 
@@ -56,7 +55,7 @@ module SAG_MODULE
 		*/
 		void startSubArrayManager	(in long sbID)
 			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
 				SAGErr::SAGSubArrayManagerAlreadyStartedEx
 			);
 			
@@ -71,7 +70,7 @@ module SAG_MODULE
 		*/	
 		void stopSubArrayManager (in long sbID)
 			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
 				SAGErr::SAGSubArrayManagerAlreadyStoppedEx
 			);		
 			
@@ -86,7 +85,7 @@ module SAG_MODULE
 		*/
 		void startPipelines(in long sbID)
 			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
 				SAGErr::SAGSubArrayManagerIsNotRunningEx
 			);				
 			
@@ -99,7 +98,7 @@ module SAG_MODULE
 		*/
 		void stopPipelines(in long sbID)
 			raises(
-				COMMONErr::SchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
 				SAGErr::SAGSubArrayManagerIsNotRunningEx
 			);
 

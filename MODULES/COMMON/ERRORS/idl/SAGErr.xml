@@ -70,4 +70,11 @@
                    description="Trying to stop the SAGSci component, failed. It is not running."/>
 
 
+
+
+
+        <ErrorCode name="SchedulingBlockIdNotFoundInDatabase" 
+                   shortDescription="The scheduling block ID is not found" 
+                   description="The scheduling block ID has been searched in the database but it has not been found."/>
+
 </Type>

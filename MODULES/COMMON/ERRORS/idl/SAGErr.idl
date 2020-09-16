@@ -48,6 +48,7 @@ module SAGErr
 	 const ACSErr::ErrorCode SAGDataQualityAlreadyStopped = 10;
 	 const ACSErr::ErrorCode SAGSciAlreadyStarted = 11;
 	 const ACSErr::ErrorCode SAGSciAlreadyStopped = 12;
+	 const ACSErr::ErrorCode SchedulingBlockIdNotFoundInDatabase = 13;
 	
 	// excption for type:
 	exception SAGErrEx {
@@ -104,6 +105,10 @@ module SAGErr
 	};
 	
 	exception SAGSciAlreadyStoppedEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+	exception SchedulingBlockIdNotFoundInDatabaseEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
