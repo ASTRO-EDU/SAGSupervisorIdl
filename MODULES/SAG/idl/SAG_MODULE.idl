@@ -44,7 +44,7 @@ module SAG_MODULE
 		void newSchedulingBlock (in long sbID)
 			raises(
 				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSchedulingBlockAlreadyInProcessingEx
+				SAGErr::SAGSubArrayManagerAlreadyStartedEx
 			);
 
 
@@ -58,7 +58,7 @@ module SAG_MODULE
 		void stopSchedulingBlock (in long sbID)
 			raises(
 				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSchedulingBlockIsAlreadyStoppedEx
+				SAGErr::SAGSubArrayManagerAlreadyStoppedEx
 			);	
 		
 	
