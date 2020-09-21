@@ -32,7 +32,7 @@
                    shortDescription="SubArrayManager is not running" 
                    description="Trying to forward a request to a specific SubArray Manager but it is not running."/>
 
-        <ErrorCode name="NoObservingBlocksAvailable" 
+        <ErrorCode name="SAGNoObservingBlocksAvailable" 
                    shortDescription="No more observing blocks are available" 
                    description="Trying to start pipelines for an observing block but no more observing blocks are available."/>
 
@@ -73,8 +73,19 @@
 
 
 
-        <ErrorCode name="SchedulingBlockIdNotFoundInDatabase" 
+        <ErrorCode name="SAGSchedulingBlockIdNotFoundInDatabase" 
                    shortDescription="The scheduling block ID is not found" 
                    description="The scheduling block ID has been searched in the database but it has not been found."/>
+
+
+        <ErrorCode name="SAGSchedulingBlockAlreadyInProcessing" 
+                   shortDescription="The scheduling block is already in process." 
+                   description="Trying to start the pipelines to process the scheduling block but they are already started."/>
+
+        <ErrorCode name="SAGSchedulingBlockIsAlreadyStopped" 
+                   shortDescription="The scheduling block is not being processed." 
+                   description="Trying to stop the pipelines to process the scheduling block but they are already stopped."/>
+
+
 
 </Type>

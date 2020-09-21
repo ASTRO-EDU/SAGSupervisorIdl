@@ -22,106 +22,46 @@
 #include <acscomponent.idl>
 #include <Types.idl>
 #include <SAGErr.idl>
-#include <UTILITYErr.idl>
+
 
 #pragma prefix "sag"
 
-/**
-TODO: UTILITYErr should not be here because it is an "internal" exceptions module.
-*/
+
 module SAG_MODULE
 {
 
 	interface SAGSupervisor :  ACS::ACSComponent
 	{
+
 		/**
-		* TBD.
-		*/
-		void start ();
-			
-		/**
-		* TBD.
-		*/
-		void stop ();
-			
-		/**
-		* Startup a SubArrayManager component
 		* SUP-040 When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
 		* The SAGSupervisor receives the command to start the SubArrayManager for a specific subArrayID. 
-		* The SAGSubArray component is started by the SAGSupervisor
-		* @raise SchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
-		* @raise SAGSubArrayManagerAlreadyStarted exception if the SubArrayManager component with id=sbID is already been started.
+		* The SubArrayManager starts the SAGReco, SAGSci and SAGDQ components. 
+		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSchedulingBlockAlreadyInProcessing exception if the scheduling block is already being processed.
 		* @return void
 		*/
-		void startSubArrayManager	(in long sbID)
+		void newSchedulingBlock (in long sbID)
 			raises(
-				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSubArrayManagerAlreadyStartedEx
-			);
-			
-						
-		/**
-		* Stop a SubArrayManager component
-		* The SAGSupervisor receives the command to stop the SubArrayManager for a specific subArrayID.
-		* The SAGSubArray component is stopped by the SAGSupervisor
-		* @raise SchedulingBlockIdNotFoundInDatabase exception if no Sub Array is found in the database.
-		* @raise SAGSubArrayManagerAlreadyStopped exception if the SubArrayManager component with id=sbID is already been stopped.
-		* @return void
-		*/	
-		void stopSubArrayManager (in long sbID)
-			raises(
-				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSubArrayManagerAlreadyStoppedEx
-			);		
-			
-
-
-		/**
-		* Start components for the RECO,SCI,DQ pipelines for a specific SubArray manager and Observing Block 
-		* This command is sent from the SAGSupervisor to the SubArrayManager
- 		* @raise SchedulingBlockIdNotFoundInDatabase exception if no Sub Array is found in the database.
-		* @raise SAGSubArrayManagerIsNotRunning exception if the specific SubArray manager is not running.
-		* @retun void
-		*/
-		void startPipelines(in long sbID)
-			raises(
-				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSubArrayManagerIsNotRunningEx
-			);				
-			
-		/**
-		* Stop components for the RECO,SCI,DQ pipelines for a specific SubArray and Observing Block
-		* This command is sent from the SAGSupervisor to the SubArrayManager
- 		* @raise SchedulingBlockIdNotFoundInDatabase exception if no Sub Array is found in the database.
-		* @raise SAGSubArrayManagerIsNotRunning exception if the specific SubArray manager is not running.
-		* @return void
-		*/
-		void stopPipelines(in long sbID)
-			raises(
-				SAGErr::SchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSubArrayManagerIsNotRunningEx
+				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SAGSchedulingBlockAlreadyInProcessingEx
 			);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		/**
+		* SUP-110 SAG shall receive information when the execution of a Scheduling Blocks is cancelled. Analysis of the data taken until the cancellation command shall be executed.
+		* The SubArrayManager and its child components are deactivated.
+		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSchedulingBlockIsAlreadyStopped exception if the scheduling block is not being processed.
+		* @return void
+		*/
+		void stopSchedulingBlock (in long sbID)
+			raises(
+				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SAGSchedulingBlockIsAlreadyStoppedEx
+			);	
+		
+	
 
 	
 			
@@ -162,7 +102,7 @@ module SAG_MODULE
 	{
 
 		/**
-		* TBD.
+		* Stores the scheduling block ID.
 		*/
 		void start (in long sbID);
 
@@ -174,7 +114,7 @@ module SAG_MODULE
 		/**
 		* Start all components (SAGRECO, SAGDQ, SAGSCI) related to a specific Scheduling Block. 
 		*
-		* @raise NoObservingBlocksAvailable exception
+		* @raise SAGNoObservingBlocksAvailable exception
 		* @raise SAGRecoAlreadyStarted exception 
 		* @raise SAGDataQualityAlreadyStarted exception
 		* @raise SAGSciAlreadyStarted exception		 
@@ -182,7 +122,7 @@ module SAG_MODULE
 		*/
 		void startPipelines()
 			raises(
-				SAGErr::NoObservingBlocksAvailableEx,
+				SAGErr::SAGNoObservingBlocksAvailableEx,
 				SAGErr::SAGRecoAlreadyStartedEx,
 				SAGErr::SAGDataQualityAlreadyStartedEx,
 				SAGErr::SAGSciAlreadyStartedEx

@@ -41,14 +41,16 @@ module SAGErr
 	 const ACSErr::ErrorCode SAGSubArrayManagerAlreadyStarted = 3;
 	 const ACSErr::ErrorCode SAGSubArrayManagerAlreadyStopped = 4;
 	 const ACSErr::ErrorCode SAGSubArrayManagerIsNotRunning = 5;
-	 const ACSErr::ErrorCode NoObservingBlocksAvailable = 6;
+	 const ACSErr::ErrorCode SAGNoObservingBlocksAvailable = 6;
 	 const ACSErr::ErrorCode SAGRecoAlreadyStarted = 7;
 	 const ACSErr::ErrorCode SAGRecoAlreadyStopped = 8;
 	 const ACSErr::ErrorCode SAGDataQualityAlreadyStarted = 9;
 	 const ACSErr::ErrorCode SAGDataQualityAlreadyStopped = 10;
 	 const ACSErr::ErrorCode SAGSciAlreadyStarted = 11;
 	 const ACSErr::ErrorCode SAGSciAlreadyStopped = 12;
-	 const ACSErr::ErrorCode SchedulingBlockIdNotFoundInDatabase = 13;
+	 const ACSErr::ErrorCode SAGSchedulingBlockIdNotFoundInDatabase = 13;
+	 const ACSErr::ErrorCode SAGSchedulingBlockAlreadyInProcessing = 14;
+	 const ACSErr::ErrorCode SAGSchedulingBlockIsAlreadyStopped = 15;
 	
 	// excption for type:
 	exception SAGErrEx {
@@ -80,7 +82,7 @@ module SAGErr
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception NoObservingBlocksAvailableEx {
+	exception SAGNoObservingBlocksAvailableEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
@@ -108,7 +110,15 @@ module SAGErr
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SchedulingBlockIdNotFoundInDatabaseEx {
+	exception SAGSchedulingBlockIdNotFoundInDatabaseEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+	exception SAGSchedulingBlockAlreadyInProcessingEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+	exception SAGSchedulingBlockIsAlreadyStoppedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	

@@ -22,96 +22,67 @@
 #include <acscomponent.idl>
 #include <Types.idl>
 #include <CONSOLEErr.idl>
-#include <UTILITYErr.idl>
-#include <COMMONErr.idl>
+
+
 
 #pragma prefix "sag"
 
-/**
-TODO: UTILITYErr should not be here because it is an "internal" exceptions module.
-*/
+
 module CONSOLE_MODULE 
 {
 	
-	/** @interface Console
-	 * Operator's interface to set automatic and manual modes.
-	 * Grants manual access to low level components.
-	 */
+
 	interface Console :  ACS::ACSComponent
 	{		
 		/**
-		* Start SAG Supervisor and all related components (if present)
-		* @raise ComponentNameNotFoundEx exception if the component's name is not found among the available components (internal check).
+		* Activates the SAG Supervisor component.
 		* @raise SAGSupervisorAlreadyStartedEx exception if the SAGSupervisor is already running.
 		* @return void
 		*/
 		void startSAGSupervisor()
 			raises (
-				CONSOLEErr::SAGSupervisorAlreadyStartedEx, 
-				UTILITYErr::ComponentNameNotFoundEx
+				CONSOLEErr::SAGSupervisorAlreadyStartedEx
 			);
 
 		/**
-		* Stop SAG Supervisor
-		* @raise ComponentNameNotFoundEx exception if the component's name is not found among the available components (internal check).
+		* Deactivates the SAG Supervisor component.
 		* @raise SAGSupervisorAlreadyStopped
 		* @return void
 		*/
 		void stopSAGSupervisor()
 			raises (
-				CONSOLEErr::SAGSupervisorAlreadyStoppedEx, 
-				UTILITYErr::ComponentNameNotFoundEx
+				CONSOLEErr::SAGSupervisorAlreadyStoppedEx
 			);
 			
 			
 		/**
-		* Start all components related to a specific Scheduling block
-		* The request is forwarded to the SAGSupervisor.
-		* @raise SAGSupervisorIsNotRunning if the SAGSupervisor is not running.
+		* Forwards the request to the SAGSupervisor
+		* @raise SAGSupervisorAlreadyStartedEx exception if the SAGSupervisor is not running.
 		* @return void
 		*/
-		void startSubArrayManager(in long sbID)
-			raises (
+		void newSchedulingBlock (in long sbID)
+			raises(
 				CONSOLEErr::SAGSupervisorIsNotRunningEx
-			);
-
-		/**
-		* Stop all components related to a specific Scheduling block.
-		* The request is forwarded to the SAGSupervisor.
-		* @raise SAGSupervisorIsNotRunning if the SAGSupervisor is not running.
-		* @return void
-		*/
-		void stopSubArrayManager(in long sbID)
-			raises (
-				CONSOLEErr::SAGSupervisorIsNotRunningEx
-			);
+			);	
 
 
 		/**
-		* Start all components related to a specific Observing Block 
-		* @raise SAGSupervisorIsNotRunning if the SAGSupervisor is not running.
-		* @retun void
-		*/
-		void startPipelines(in long sbID)
-			raises (
-				CONSOLEErr::SAGSupervisorIsNotRunningEx
-			);
-
-		/**
-		* Stop all components related to a specific Scheduling Block
-		* @raise SAGSupervisorIsNotRunning exception if no scheduling block with id=sbID is found in the database.
+		* Forwards the request to the SAGSupervisor
+		* @raise SAGSupervisorAlreadyStartedEx exception if the SAGSupervisor is not running.
 		* @return void
 		*/
-		void stopPipelines(in long sbID)
-			raises (
+		void stopSchedulingBlock (in long sbID)
+			raises(
 				CONSOLEErr::SAGSupervisorIsNotRunningEx
-			);
-
+			);	
+	
+	
+	
 	
 		
 		/**
-		* Start the data processing related to a Scheduling block
-		* @raise SAGSupervisorIsNotRunning exception if no scheduling block with id=sbID is found in the database.
+		* Forwards the request to the SAGSupervisor
+		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
 		* @return void
 		*/
 		void startDataProcessing(in long sbID)
@@ -120,8 +91,8 @@ module CONSOLE_MODULE
 			);
 		
 		/**
-		* Stop the data processing related to a Scheduling block
-		* @raise SAGSupervisorIsNotRunning exception if no scheduling block with id=sbID is found in the database.
+		* Forwards the request to the SAGSupervisor
+		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
 		* @return void
 		*/    
 		void stopDataProcessing(in long sbID)
