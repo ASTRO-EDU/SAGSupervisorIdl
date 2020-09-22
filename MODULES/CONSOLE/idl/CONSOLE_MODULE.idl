@@ -36,28 +36,28 @@ module CONSOLE_MODULE
 	{		
 		/**
 		* Activates the SAG Supervisor component.
-		* @raise SAGSupervisorAlreadyStartedEx exception if the SAGSupervisor is already running.
+		* @raise SAGSupervisorAlreadyActivated exception if the SAGSupervisor is already running.
 		* @return void
 		*/
 		void startSAGSupervisor()
 			raises (
-				CONSOLEErr::SAGSupervisorAlreadyStartedEx
+				CONSOLEErr::SAGSupervisorAlreadyActivatedEx
 			);
 
 		/**
 		* Deactivates the SAG Supervisor component.
-		* @raise SAGSupervisorAlreadyStopped
+		* @raise SAGSupervisorAlreadyDeactivated
 		* @return void
 		*/
 		void stopSAGSupervisor()
 			raises (
-				CONSOLEErr::SAGSupervisorAlreadyStoppedEx
+				CONSOLEErr::SAGSupervisorAlreadyDeactivatedEx
 			);
 			
 			
 		/**
 		* Forwards the request to the SAGSupervisor
-		* @raise SAGSupervisorAlreadyStartedEx exception if the SAGSupervisor is not running.
+		* @raise SAGSupervisorAlreadyActivated exception if the SAGSupervisor is not running.
 		* @return void
 		*/
 		void newSchedulingBlock (in long sbID)
@@ -68,7 +68,7 @@ module CONSOLE_MODULE
 
 		/**
 		* Forwards the request to the SAGSupervisor
-		* @raise SAGSupervisorAlreadyStartedEx exception if the SAGSupervisor is not running.
+		* @raise SAGSupervisorAlreadyActivated exception if the SAGSupervisor is not running.
 		* @return void
 		*/
 		void stopSchedulingBlock (in long sbID)
@@ -77,15 +77,12 @@ module CONSOLE_MODULE
 			);	
 	
 	
-	
-	
-		
 		/**
 		* Forwards the request to the SAGSupervisor
 		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
 		* @return void
 		*/
-		void startDataProcessing(in long sbID)
+		void startDataAcquisition(in long sbID)
 			raises (
 				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);
@@ -95,7 +92,18 @@ module CONSOLE_MODULE
 		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
 		* @return void
 		*/    
-		void stopDataProcessing(in long sbID)
+		void stopDataAcquisition(in long sbID)
+			raises (
+				CONSOLEErr::SAGSupervisorIsNotRunningEx
+			);
+
+
+		/**
+		* Forwards the request to the SAGSupervisor
+		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
+		* @return void
+		*/
+		void updateSubArray(in long sbID)
 			raises (
 				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);

@@ -34,65 +34,89 @@ module SAG_MODULE
 	{
 
 		/**
-		* SUP-040 When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
-		* The SAGSupervisor receives the command to start the SubArrayManager for a specific subArrayID. 
-		* The SubArrayManager starts the SAGReco, SAGSci and SAGDQ components. 
+		* [SUP-040] When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
+
+		* @param sbID: the id of the Scheduling Block.
 		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
-		* @raise SAGSchedulingBlockAlreadyInProcessing exception if the scheduling block is already being processed.
+		* @raise SAGSubArrayManagerAlreadyActivated exception if the scheduling block is already being processed.
+		* @raise SAGRecoAlreadyActivated exception if the SAGReco component is already activated.
+		* @raise SAGDataQualityAlreadyActivated exception if the SAGDQ component is already activated. 
+		* @raise SAGSciAlreadyActivated exception if the SAGSci component is already activated. 
 		* @return void
 		*/
 		void newSchedulingBlock (in long sbID)
 			raises(
 				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSubArrayManagerAlreadyStartedEx
+				SAGErr::SAGSubArrayManagerAlreadyActivatedEx,
+				SAGErr::SAGRecoAlreadyActivatedEx,
+				SAGErr::SAGDataQualityAlreadyActivatedEx,
+				SAGErr::SAGSciAlreadyActivatedEx
 			);
 
 
 		/**
-		* SUP-110 SAG shall receive information when the execution of a Scheduling Blocks is cancelled. Analysis of the data taken until the cancellation command shall be executed.
-		* The SubArrayManager and its child components are deactivated.
+		* [SUP-110] SAG shall receive information when the execution of a Scheduling Blocks is cancelled. Analysis of the data taken until the cancellation command shall be executed.
+		*
+		* @param sbID: the id of the Scheduling Block.
 		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
-		* @raise SAGSchedulingBlockIsAlreadyStopped exception if the scheduling block is not being processed.
+		* @raise SAGSubArrayManagerAlreadyDeactivated exception if the scheduling block is not being processed.
+		* @raise SAGRecoAlreadyDeactivated exception if the SAGReco component is already dectivated. 
+		* @raise SAGDataQualityAlreadyDeactivated exception if the SAGDq component is already deactivated. 
+		* @raise SAGSciAlreadyDeactivated exception if the SAGSci component is already deactivated. 
 		* @return void
 		*/
 		void stopSchedulingBlock (in long sbID)
 			raises(
 				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGSubArrayManagerAlreadyStoppedEx
+				SAGErr::SAGSubArrayManagerAlreadyDeactivatedEx,
+				SAGErr::SAGRecoAlreadyDeactivatedEx,
+				SAGErr::SAGDataQualityAlreadyDeactivatedEx,
+				SAGErr::SAGSciAlreadyDeactivatedEx
 			);	
 		
 	
-
-	
-			
 		/**
-		 * Start pipelines data processing for a Scheduling Block
-		 * SUP-050 When a sub-array enters in observing state, the SAG Supervisor shall inform the related SAG pipeline, and new data shall be received.
-		 * This method ask to the SubArrayManager to start the data procesing for a specific Sub Array and Observing Block
-		 * Raises an exception if called twice or if no Sub Array and Observation Block are found in the database
-		 * @return None
-		 */
-		void startDataProcessing (in long sbID)
-			raises(SAGErr::SAGGenericEx);
+		* [SUP-50] When a sub-array enters in observing state, the SAG Supervisor shall inform the related SAG pipeline, and new data shall be received.
+		*
+		* @param sbID: the id of the Scheduling Block.
+		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGDataAcquisitionAlreadyStarted exception if the data acquisition is already started.
+		* @return void
+		*/
+		void startDataAcquisition (in long sbID)
+			raises(
+				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SAGDataAcquisitionAlreadyStartedEx
+			);
+
 			
 					
 		/**
-		 * stop  pipelines data processing for a Scheduling Block
-		 * SUP-060 When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an au-tomatic and controlled way.
-		 * This method ask to the SubArrayManager to stop the data procesing for a specific Sub Array and Observing Block
-		 * Raises an exception if called twice or if no Sub Array and Observation Block are found in the database
-		 * @return None
-		 */
-		void stopDataProcessing(in long sbID)
-			raises(SAGErr::SAGGenericEx);
-			
+		* [SUP-060] When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an automatic and controlled way.
+	
+		* @param sbID: the id of the Scheduling Block.
+		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGDataAcquisitionAlreadyStopped exception if the data acquisition is already stopped.
+		* @return void
+		*/
+		void stopDataAcquisition (in long sbID)
+			raises(
+				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
+				SAGErr::SAGDataAcquisitionAlreadyStoppedEx
+			);
+
+
 		/**
-		 * Update pipelines when Sub-Array change status
-		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
-		 * @return None
-		 */
+		* [SUP-090] SAG Supervisor shall receive the modified SB when a sub-array is modified. 
+		* 
+		* @param sbID: the id of the Scheduling Block.
+		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
+		* @return void
+		*/
 		void updateSubArray (in long sbID)
-			raises(SAGErr::SAGGenericEx);
+			raises(
+				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx
+			);
 
 
 		
@@ -102,86 +126,75 @@ module SAG_MODULE
 	{
 
 		/**
-		* Stores the scheduling block ID.
+		* Initialize the scheduling block ID of the SubArrayManager component.
+		* @param sbID: the id of the Scheduling Block.
 		*/
-		void start (in long sbID);
+		void initializeWithData (in long sbID);
 
-		/**
-		* TBD.
-		*/
-		void stop ();
 			
 		/**
-		* Start all components (SAGRECO, SAGDQ, SAGSCI) related to a specific Scheduling Block. 
+		* Activate the SAGReco, SAGSci and SAGDQ components related to a specific Scheduling Block. 
+		* Start the SAGReco, SAGSci and SAGDQ processes.
 		*
-		* @raise SAGNoObservingBlocksAvailable exception
-		* @raise SAGRecoAlreadyStarted exception 
-		* @raise SAGDataQualityAlreadyStarted exception
-		* @raise SAGSciAlreadyStarted exception		 
+		* @raise SAGRecoAlreadyActivated exception 
+		* @raise SAGDataQualityAlreadyActivated exception
+		* @raise SAGSciAlreadyActivated exception		 
 		* @retun void
 		*/
-		void startPipelines()
+		void activateAndStartPipelines()
 			raises(
-				SAGErr::SAGNoObservingBlocksAvailableEx,
-				SAGErr::SAGRecoAlreadyStartedEx,
-				SAGErr::SAGDataQualityAlreadyStartedEx,
-				SAGErr::SAGSciAlreadyStartedEx
+				SAGErr::SAGRecoAlreadyActivatedEx,
+				SAGErr::SAGDataQualityAlreadyActivatedEx,
+				SAGErr::SAGSciAlreadyActivatedEx
 			);
 			
 		/**
-		* Stop all components (SAGRECO, SAGDQ, SAGSCI) related to a specific Scheduling Block.
+		* Stop the SAGReco, SAGSci and SAGDQ processes.
+		* Deactivate the SAGReco, SAGSci and SAGDQ components.
 		*
-		* @raise SAGRecoAlreadyStarted exception 
-		* @raise SAGDataQualityAlreadyStarted exception
-		* @raise SAGSciAlreadyStarted exception
+		* @raise SAGRecoAlreadyActivated exception 
+		* @raise SAGDataQualityAlreadyActivated exception
+		* @raise SAGSciAlreadyActivated exception
 		* @return void
 		*/
-		void stopPipelines()
+		void stopAndDeactivatePipelines()
 			raises(
-				SAGErr::SAGRecoAlreadyStoppedEx,
-				SAGErr::SAGDataQualityAlreadyStoppedEx,
-				SAGErr::SAGSciAlreadyStoppedEx
+				SAGErr::SAGRecoAlreadyDeactivatedEx,
+				SAGErr::SAGDataQualityAlreadyDeactivatedEx,
+				SAGErr::SAGSciAlreadyDeactivatedEx
 			);		
 			
 
 
-
-
-
-
-
-
-
-
-
+		/**
+		* Start the data aquisition for a SubArray data Processing.
+		* 
+		* @raise SAGDataAcquisitionAlreadyStarted exception if the data acquisition is already started.
+		* @return void
+		*/
+		void startDataAcquisition ()
+			raises(
+				SAGErr::SAGDataAcquisitionAlreadyStartedEx
+			);			
+			
+		/**
+		* Stop the data aquisition for a SubArray data Processing.
+		* 
+		* @raise SAGDataAcquisitionAlreadyStopped exception if the data acquisition is already stopped.
+		* @return void
+		*/
+		void stopDataAcquisition ()
+			raises(
+				SAGErr::SAGDataAcquisitionAlreadyStoppedEx
+			);
 
 
 		/**
-		 * Start Sub Array Data Processing  for an Observing Block.
-		 * 
-		 * Raises an exception if called twice.
-		 * @param  Sub Array Data Type
-		 * @return None
-		 */
-		void startDataProcessing ()
-			raises(SAGErr::SAGGenericEx);
-			
-			
-		/**
-		 * Stop Sub Array Data Processing for an Observing Block.
-		 * 
-		 * Raises an exception if called twice.
-		 * @param  Sub Array Data Type
-		 * @return None
-		 */
-		void stopDataProcessing ()
-			raises(SAGErr::SAGGenericEx);
-			
-		/**
-		 * Update Sub-Array status
-		 * SUP-090 SAG Supervisor shall receive the modified SB when a sub-array is modified. 
-		 * @return None
-		 */
+		* TBD 
+		* 
+		* @param sbID: the id of the Scheduling Block.
+		* @return void
+		*/
 		void updateSubArray()
 			raises(SAGErr::SAGGenericEx);
 		
@@ -190,39 +203,39 @@ module SAG_MODULE
 		
 	interface SAGReco : ACS::ACSComponent
 	{
-
+		
 		/**
-		* Start the SAG RECO Supervisor.
-		* The SAG RECO Supervisor will load all its components
-		* @param  @param  Scheduling Block ID
-		* @return None
+		* Initialize the scheduling block ID of the SAGReco component.
+		* @param sbID: the id of the Scheduling Block.
 		*/
-		void start (in long sbID);
-
-		// Stop the SAG Reco Supervisor. The SAG Reco Supervisor will stop all its
-		// components Raises an exception if called twice.
-		// @return None
-		void stop ();
+		void initializeWithData (in long sbID);
 
 		/**
-		 * Start the Reco data processing.
-		 * Start the data processing with all the pipelines instantiated during the start()
-		 * Raises an exception if called twice.
-		 * 
-		 * @return None
-		 */
-		void startDataProcessing ()
+		* Start the RECO pipeline process.
+		* @return void
+		*/
+		void start ()
 			raises(SAGErr::SAGGenericEx);
-			
+
 		/**
-		 * Stop the Reco data processing.
-		 * Stop the data processing with all the pipelines instantiated during the start()
-		 * Raises an exception if called twice.
-		 * 
-		 * @return None
-		 */
-		 
-		void stopDataProcessing ()
+		* Kill the RECO pipeline process.
+		* @return void
+		*/
+		void stop ()
+			raises(SAGErr::SAGGenericEx);
+
+		/**
+		* Start the data acquisition.
+		* @return void
+		*/
+		void startDataAcquisition ()
+			raises(SAGErr::SAGGenericEx);
+		
+		/**
+		* Start the data acquisition.
+		* @return void
+		*/
+		void stopDataAcquisition ()
 			raises(SAGErr::SAGGenericEx);
 			
 	};
@@ -231,40 +244,37 @@ module SAG_MODULE
 	{
 
 		/**
-		 * Start the SAGDataQuality component.
-		 * 
-		 * Raises an exception if called twice.
-		 * @param  Scheduling Block ID
-		 * @return None
-		 */
-		void start (in long sbID)
-			raises(SAGErr::SAGDataQualityAlreadyStartedEx);
+		* Initialize the scheduling block ID of the SAGDataQuality component.
+		* @param sbID: the id of the Scheduling Block.
+		*/
+		void initializeWithData (in long sbID);
 
-		/* Stop the SAG Data Quality component.
-		*  Raises an exception if called twice.
-		*  @return None
+		/**
+		* Start the DQ pipeline process.
+		* @return void
+		*/
+		void start ()
+			raises(SAGErr::SAGGenericEx);
+
+		/**
+		* Kill the DQ pipeline process.
+		* @return void
 		*/
 		void stop ()
-			raises(SAGErr::SAGDataQualityAlreadyStoppedEx);
+			raises(SAGErr::SAGGenericEx);
+
+		/**
+		* Start the data acquisition.
+		* @return void
+		*/
+		void startDataAcquisition ()
+			raises(SAGErr::SAGGenericEx);
 		
 		/**
-		 * Start the Data Quality data processing.
-		 * Start the data processing with all the pipelines instantiated during the start()
-		 * Raises an exception if called twice.
-		 * 
-		 * @return None
-		 */
-		void startDataProcessing ()
-			raises(SAGErr::SAGGenericEx);
-			
-		/**
-		 * Stop the Data Quality data processing.
-		 * Stop the data processing with all the pipelines instantiated during the start()
-		 * Raises an exception if called twice.
-		 * 
-		 * @return None
-		 */
-		void stopDataProcessing ()
+		* Stop the data acquisition.
+		* @return void
+		*/
+		void stopDataAcquisition ()
 			raises(SAGErr::SAGGenericEx);
 
 	};
@@ -273,46 +283,39 @@ module SAG_MODULE
 	{
 
 		/**
-		 * Start the SAGSci component.
-		 * 
-		 * Raises an exception if called twice.
-		 * @param  Scheduling Block ID
-		 * @return None
-		 */
-		void start (in long sbID)
-			raises(SAGErr::SAGSciAlreadyStartedEx);
+		* Initialize the scheduling block ID of the SAGSci component.
+		* @param sbID: the id of the Scheduling Block.
+		*/
+		void initializeWithData (in long sbID);
 
 		/**
-		* Stop the SAGSci component. 
-		* The SAG Sci Supervisor will stop all its
-		* Raises an exception if called twice.
-		* @return None
+		* Start the SCI pipeline process.
+		* @return void
+		*/
+		void start ()
+			raises(SAGErr::SAGGenericEx);
+
+		/**
+		* Kill the SCI pipeline process.
+		* @return void
 		*/
 		void stop ()
-			raises(SAGErr::SAGSciAlreadyStoppedEx);
-						
-		/**
-		 * Start the SCI data processing.
-		 * Start the data processing with all the pipelines instantiated during the start()
-		 * Raises an exception if called twice.
-		 * 
-		 * @return None
-		 */
-		void startDataProcessing ()
-			raises(SAGErr::SAGGenericEx);
-			
-		/**
-		 * Stop the SCI data processing.
-		 * Stop the data processing with all the pipelines instantiated during the start()
-		 * Raises an exception if called twice.
-		 * 
-		 * @return None
-		 */
-		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 
+		/**
+		* Start the data acquisition.
+		* @return void
+		*/
+		void startDataAcquisition ()
+			raises(SAGErr::SAGGenericEx);
 		
-
+		/**
+		* Stop the data acquisition.
+		* @return void
+		*/
+		void stopDataAcquisition ()
+			raises(SAGErr::SAGGenericEx);
+	
 	};
 
 };

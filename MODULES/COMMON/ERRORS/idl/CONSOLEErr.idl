@@ -35,8 +35,8 @@ module ACSErr
 
 module CONSOLEErr
 {
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStarted = 0;
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStopped = 1;
+	 const ACSErr::ErrorCode SAGSupervisorAlreadyActivated = 0;
+	 const ACSErr::ErrorCode SAGSupervisorAlreadyDeactivated = 1;
 	 const ACSErr::ErrorCode SAGSupervisorIsNotRunning = 2;
 	
 	// excption for type:
@@ -45,11 +45,11 @@ module CONSOLEErr
 	};
 	
 	// excptions for codes:
-	exception SAGSupervisorAlreadyStartedEx {
+	exception SAGSupervisorAlreadyActivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSupervisorAlreadyStoppedEx {
+	exception SAGSupervisorAlreadyDeactivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	

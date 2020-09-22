@@ -36,21 +36,23 @@ module ACSErr
 module SAGErr
 {
 	 const ACSErr::ErrorCode SAGGeneric = 0;
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStarted = 1;
-	 const ACSErr::ErrorCode SAGSupervisorAlreadyStopped = 2;
-	 const ACSErr::ErrorCode SAGSubArrayManagerAlreadyStarted = 3;
-	 const ACSErr::ErrorCode SAGSubArrayManagerAlreadyStopped = 4;
+	 const ACSErr::ErrorCode SAGSupervisorAlreadyActivated = 1;
+	 const ACSErr::ErrorCode SAGSupervisorAlreadyDeactivated = 2;
+	 const ACSErr::ErrorCode SAGSubArrayManagerAlreadyActivated = 3;
+	 const ACSErr::ErrorCode SAGSubArrayManagerAlreadyDeactivated = 4;
 	 const ACSErr::ErrorCode SAGSubArrayManagerIsNotRunning = 5;
 	 const ACSErr::ErrorCode SAGNoObservingBlocksAvailable = 6;
-	 const ACSErr::ErrorCode SAGRecoAlreadyStarted = 7;
-	 const ACSErr::ErrorCode SAGRecoAlreadyStopped = 8;
-	 const ACSErr::ErrorCode SAGDataQualityAlreadyStarted = 9;
-	 const ACSErr::ErrorCode SAGDataQualityAlreadyStopped = 10;
-	 const ACSErr::ErrorCode SAGSciAlreadyStarted = 11;
-	 const ACSErr::ErrorCode SAGSciAlreadyStopped = 12;
+	 const ACSErr::ErrorCode SAGRecoAlreadyActivated = 7;
+	 const ACSErr::ErrorCode SAGRecoAlreadyDeactivated = 8;
+	 const ACSErr::ErrorCode SAGDataQualityAlreadyActivated = 9;
+	 const ACSErr::ErrorCode SAGDataQualityAlreadyDeactivated = 10;
+	 const ACSErr::ErrorCode SAGSciAlreadyActivated = 11;
+	 const ACSErr::ErrorCode SAGSciAlreadyDeactivated = 12;
 	 const ACSErr::ErrorCode SAGSchedulingBlockIdNotFoundInDatabase = 13;
 	 const ACSErr::ErrorCode SAGSchedulingBlockAlreadyInProcessing = 14;
-	 const ACSErr::ErrorCode SAGSchedulingBlockIsAlreadyStopped = 15;
+	 const ACSErr::ErrorCode SAGSchedulingBlockIsAlreadyDeactivated = 15;
+	 const ACSErr::ErrorCode SAGDataAcquisitionAlreadyStarted = 16;
+	 const ACSErr::ErrorCode SAGDataAcquisitionAlreadyStopped = 17;
 	
 	// excption for type:
 	exception SAGErrEx {
@@ -62,19 +64,19 @@ module SAGErr
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSupervisorAlreadyStartedEx {
+	exception SAGSupervisorAlreadyActivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSupervisorAlreadyStoppedEx {
+	exception SAGSupervisorAlreadyDeactivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSubArrayManagerAlreadyStartedEx {
+	exception SAGSubArrayManagerAlreadyActivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSubArrayManagerAlreadyStoppedEx {
+	exception SAGSubArrayManagerAlreadyDeactivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
@@ -86,27 +88,27 @@ module SAGErr
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGRecoAlreadyStartedEx {
+	exception SAGRecoAlreadyActivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGRecoAlreadyStoppedEx {
+	exception SAGRecoAlreadyDeactivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGDataQualityAlreadyStartedEx {
+	exception SAGDataQualityAlreadyActivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGDataQualityAlreadyStoppedEx {
+	exception SAGDataQualityAlreadyDeactivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSciAlreadyStartedEx {
+	exception SAGSciAlreadyActivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSciAlreadyStoppedEx {
+	exception SAGSciAlreadyDeactivatedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
@@ -118,7 +120,15 @@ module SAGErr
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGSchedulingBlockIsAlreadyStoppedEx {
+	exception SAGSchedulingBlockIsAlreadyDeactivatedEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+	exception SAGDataAcquisitionAlreadyStartedEx {
+		ACSErr::ErrorTrace errorTrace;	
+	};
+	
+	exception SAGDataAcquisitionAlreadyStoppedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
