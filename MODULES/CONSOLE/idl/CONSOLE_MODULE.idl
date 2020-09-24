@@ -36,7 +36,7 @@ module CONSOLE_MODULE
 	{		
 		/**
 		* Activates the SAG Supervisor component.
-		* @raise SAGSupervisorAlreadyActivated exception if the SAGSupervisor is already running.
+		* @raise SAGSupervisorAlreadyActivatedEx
 		* @return void
 		*/
 		void startSAGSupervisor()
@@ -46,7 +46,7 @@ module CONSOLE_MODULE
 
 		/**
 		* Deactivates the SAG Supervisor component.
-		* @raise SAGSupervisorAlreadyDeactivated
+		* @raise SAGSupervisorAlreadyDeactivatedEx
 		* @return void
 		*/
 		void stopSAGSupervisor()
@@ -57,7 +57,7 @@ module CONSOLE_MODULE
 			
 		/**
 		* Forwards the request to the SAGSupervisor
-		* @raise SAGSupervisorAlreadyActivated exception if the SAGSupervisor is not running.
+		* @raise SAGSupervisorAlreadyActivatedEx
 		* @return void
 		*/
 		void newSchedulingBlock (in long sbID)
@@ -68,7 +68,7 @@ module CONSOLE_MODULE
 
 		/**
 		* Forwards the request to the SAGSupervisor
-		* @raise SAGSupervisorAlreadyActivated exception if the SAGSupervisor is not running.
+		* @raise SAGSupervisorAlreadyActivatedEx
 		* @return void
 		*/
 		void stopSchedulingBlock (in long sbID)
@@ -79,20 +79,20 @@ module CONSOLE_MODULE
 	
 		/**
 		* Forwards the request to the SAGSupervisor
-		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
+		* @raise SAGSupervisorIsNotRunningEx
 		* @return void
 		*/
-		void startDataAcquisition(in long sbID)
+		void startObservation(in long sbID)
 			raises (
 				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);
 		
 		/**
 		* Forwards the request to the SAGSupervisor
-		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
+		* @raise SAGSupervisorIsNotRunningEx
 		* @return void
 		*/    
-		void stopDataAcquisition(in long sbID)
+		void stopObservation(in long sbID)
 			raises (
 				CONSOLEErr::SAGSupervisorIsNotRunningEx
 			);
@@ -100,7 +100,7 @@ module CONSOLE_MODULE
 
 		/**
 		* Forwards the request to the SAGSupervisor
-		* @raise SAGSupervisorIsNotRunning exception if the SAGSupervisor is not running.
+		* @raise SAGSupervisorIsNotRunningEx
 		* @return void
 		*/
 		void updateSubArray(in long sbID)

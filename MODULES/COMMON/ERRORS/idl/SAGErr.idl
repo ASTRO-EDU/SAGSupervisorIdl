@@ -51,8 +51,8 @@ module SAGErr
 	 const ACSErr::ErrorCode SAGSchedulingBlockIdNotFoundInDatabase = 13;
 	 const ACSErr::ErrorCode SAGSchedulingBlockAlreadyInProcessing = 14;
 	 const ACSErr::ErrorCode SAGSchedulingBlockIsAlreadyDeactivated = 15;
-	 const ACSErr::ErrorCode SAGDataAcquisitionAlreadyStarted = 16;
-	 const ACSErr::ErrorCode SAGDataAcquisitionAlreadyStopped = 17;
+	 const ACSErr::ErrorCode SAGDataProcessingAlreadyStarted = 16;
+	 const ACSErr::ErrorCode SAGDataProcessingAlreadyStopped = 17;
 	
 	// excption for type:
 	exception SAGErrEx {
@@ -124,11 +124,11 @@ module SAGErr
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGDataAcquisitionAlreadyStartedEx {
+	exception SAGDataProcessingAlreadyStartedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	
-	exception SAGDataAcquisitionAlreadyStoppedEx {
+	exception SAGDataProcessingAlreadyStoppedEx {
 		ACSErr::ErrorTrace errorTrace;	
 	};
 	

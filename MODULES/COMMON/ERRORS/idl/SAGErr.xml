@@ -87,13 +87,13 @@
                    description="Trying to stop the pipelines to process the scheduling block but they are already Deactivated."/>
 
 
-        <ErrorCode name="SAGDataAcquisitionAlreadyStarted" 
-                   shortDescription="The data acquisition is already started." 
-                   description="Trying to start the data acquisition for a scheduling block but it is already started."/>
+        <ErrorCode name="SAGDataProcessingAlreadyStarted" 
+                   shortDescription="The data processing is already started." 
+                   description="Trying to start the data processing for a scheduling block but it is already started."/>
 
-        <ErrorCode name="SAGDataAcquisitionAlreadyStopped" 
-                   shortDescription="The data acquisition is already stopped." 
-                   description="Trying to stop the data acquisition for a scheduling block but it is already stopped."/>
+        <ErrorCode name="SAGDataProcessingAlreadyStopped" 
+                   shortDescription="The data processing is already stopped." 
+                   description="Trying to stop the data processing for a scheduling block but it is already stopped."/>
 
 
 

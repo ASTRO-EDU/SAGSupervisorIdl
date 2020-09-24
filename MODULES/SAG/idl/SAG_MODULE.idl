@@ -37,11 +37,11 @@ module SAG_MODULE
 		* [SUP-040] When a new SB is received, a dedicated SAG pipeline shall start in an automatic and controlled way.
 
 		* @param sbID: the id of the Scheduling Block.
-		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
-		* @raise SAGSubArrayManagerAlreadyActivated exception if the scheduling block is already being processed.
-		* @raise SAGRecoAlreadyActivated exception if the SAGReco component is already activated.
-		* @raise SAGDataQualityAlreadyActivated exception if the SAGDQ component is already activated. 
-		* @raise SAGSciAlreadyActivated exception if the SAGSci component is already activated. 
+		* @raise SAGSchedulingBlockIdNotFoundInDatabaseEx 
+		* @raise SAGSubArrayManagerAlreadyActivatedEx
+		* @raise SAGRecoAlreadyActivatedEx
+		* @raise SAGDataQualityAlreadyActivatedEx
+		* @raise SAGSciAlreadyActivatedEx
 		* @return void
 		*/
 		void newSchedulingBlock (in long sbID)
@@ -58,11 +58,11 @@ module SAG_MODULE
 		* [SUP-110] SAG shall receive information when the execution of a Scheduling Blocks is cancelled. Analysis of the data taken until the cancellation command shall be executed.
 		*
 		* @param sbID: the id of the Scheduling Block.
-		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
-		* @raise SAGSubArrayManagerAlreadyDeactivated exception if the scheduling block is not being processed.
-		* @raise SAGRecoAlreadyDeactivated exception if the SAGReco component is already dectivated. 
-		* @raise SAGDataQualityAlreadyDeactivated exception if the SAGDq component is already deactivated. 
-		* @raise SAGSciAlreadyDeactivated exception if the SAGSci component is already deactivated. 
+		* @raise SAGSchedulingBlockIdNotFoundInDatabaseEx
+		* @raise SAGSubArrayManagerAlreadyDeactivatedEx
+		* @raise SAGRecoAlreadyDeactivatedEx
+		* @raise SAGDataQualityAlreadyDeactivatedEx 
+		* @raise SAGSciAlreadyDeactivatedEx
 		* @return void
 		*/
 		void stopSchedulingBlock (in long sbID)
@@ -79,14 +79,14 @@ module SAG_MODULE
 		* [SUP-50] When a sub-array enters in observing state, the SAG Supervisor shall inform the related SAG pipeline, and new data shall be received.
 		*
 		* @param sbID: the id of the Scheduling Block.
-		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
-		* @raise SAGDataAcquisitionAlreadyStarted exception if the data acquisition is already started.
+		* @raise SAGSchedulingBlockIdNotFoundInDatabaseEx
+		* @raise SAGDataProcessingAlreadyStartedEx
 		* @return void
 		*/
-		void startDataAcquisition (in long sbID)
+		void startObservation (in long sbID)
 			raises(
 				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGDataAcquisitionAlreadyStartedEx
+				SAGErr::SAGDataProcessingAlreadyStartedEx
 			);
 
 			
@@ -95,14 +95,14 @@ module SAG_MODULE
 		* [SUP-060] When a sub-array stops the observation, the SAG Supervisor shall inform SAG pipelines that shall shutdown data processing in an automatic and controlled way.
 	
 		* @param sbID: the id of the Scheduling Block.
-		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
-		* @raise SAGDataAcquisitionAlreadyStopped exception if the data acquisition is already stopped.
+		* @raise SAGSchedulingBlockIdNotFoundInDatabaseEx
+		* @raise SAGDataProcessingAlreadyStoppedEx
 		* @return void
 		*/
-		void stopDataAcquisition (in long sbID)
+		void stopObservation (in long sbID)
 			raises(
 				SAGErr::SAGSchedulingBlockIdNotFoundInDatabaseEx,
-				SAGErr::SAGDataAcquisitionAlreadyStoppedEx
+				SAGErr::SAGDataProcessingAlreadyStoppedEx
 			);
 
 
@@ -110,7 +110,7 @@ module SAG_MODULE
 		* [SUP-090] SAG Supervisor shall receive the modified SB when a sub-array is modified. 
 		* 
 		* @param sbID: the id of the Scheduling Block.
-		* @raise SAGSchedulingBlockIdNotFoundInDatabase exception if no scheduling block with id=sbID is found in the database.
+		* @raise SAGSchedulingBlockIdNotFoundInDatabaseEx
 		* @return void
 		*/
 		void updateSubArray (in long sbID)
@@ -136,9 +136,9 @@ module SAG_MODULE
 		* Activate the SAGReco, SAGSci and SAGDQ components related to a specific Scheduling Block. 
 		* Start the SAGReco, SAGSci and SAGDQ processes.
 		*
-		* @raise SAGRecoAlreadyActivated exception 
-		* @raise SAGDataQualityAlreadyActivated exception
-		* @raise SAGSciAlreadyActivated exception		 
+		* @raise SAGRecoAlreadyActivatedEx 
+		* @raise SAGDataQualityAlreadyActivatedEx
+		* @raise SAGSciAlreadyActivatedEx		 
 		* @retun void
 		*/
 		void activateAndStartPipelines()
@@ -152,9 +152,9 @@ module SAG_MODULE
 		* Stop the SAGReco, SAGSci and SAGDQ processes.
 		* Deactivate the SAGReco, SAGSci and SAGDQ components.
 		*
-		* @raise SAGRecoAlreadyActivated exception 
-		* @raise SAGDataQualityAlreadyActivated exception
-		* @raise SAGSciAlreadyActivated exception
+		* @raise SAGRecoAlreadyActivatedEx
+		* @raise SAGDataQualityAlreadyActivatedEx
+		* @raise SAGSciAlreadyActivatedEx
 		* @return void
 		*/
 		void stopAndDeactivatePipelines()
@@ -169,23 +169,23 @@ module SAG_MODULE
 		/**
 		* Start the data aquisition for a SubArray data Processing.
 		* 
-		* @raise SAGDataAcquisitionAlreadyStarted exception if the data acquisition is already started.
+		* @raise SAGDataProcessingAlreadyStartedEx
 		* @return void
 		*/
-		void startDataAcquisition ()
+		void startDataProcessing ()
 			raises(
-				SAGErr::SAGDataAcquisitionAlreadyStartedEx
+				SAGErr::SAGDataProcessingAlreadyStartedEx
 			);			
 			
 		/**
 		* Stop the data aquisition for a SubArray data Processing.
 		* 
-		* @raise SAGDataAcquisitionAlreadyStopped exception if the data acquisition is already stopped.
+		* @raise SAGDataProcessingAlreadyStoppedEx
 		* @return void
 		*/
-		void stopDataAcquisition ()
+		void stopDataProcessing ()
 			raises(
-				SAGErr::SAGDataAcquisitionAlreadyStoppedEx
+				SAGErr::SAGDataProcessingAlreadyStoppedEx
 			);
 
 
@@ -225,17 +225,17 @@ module SAG_MODULE
 			raises(SAGErr::SAGGenericEx);
 
 		/**
-		* Start the data acquisition.
+		* Start Data Processing
 		* @return void
 		*/
-		void startDataAcquisition ()
+		void startDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 		
 		/**
-		* Start the data acquisition.
+		* Stop Data Processing
 		* @return void
 		*/
-		void stopDataAcquisition ()
+		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 			
 	};
@@ -264,17 +264,17 @@ module SAG_MODULE
 			raises(SAGErr::SAGGenericEx);
 
 		/**
-		* Start the data acquisition.
+		* Start Data Processing
 		* @return void
 		*/
-		void startDataAcquisition ()
+		void startDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 		
 		/**
-		* Stop the data acquisition.
+		* Stop Data Processing
 		* @return void
 		*/
-		void stopDataAcquisition ()
+		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 
 	};
@@ -303,17 +303,17 @@ module SAG_MODULE
 			raises(SAGErr::SAGGenericEx);
 
 		/**
-		* Start the data acquisition.
+		* Start Data Processing
 		* @return void
 		*/
-		void startDataAcquisition ()
+		void startDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 		
 		/**
-		* Stop the data acquisition.
+		* Stop Data Processing
 		* @return void
 		*/
-		void stopDataAcquisition ()
+		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 	
 	};
