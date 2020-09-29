@@ -41,6 +41,19 @@ module SIMULATED_MODULE
         long getSubArrayIDFromSB(in long sbID);
 
     };   
+
+    interface SimCentralControl : ACS::ACSComponent {
+
+        /** 
+        * Ask the CC for the parameters to connect with ADH and receive data for a specific SB.
+        *
+        * @param sbID
+        * @raise 
+        * @return String
+        */        
+        string getConnectionParametersToADH(in long sbID);
+
+    };   
 };
  
 #endif
