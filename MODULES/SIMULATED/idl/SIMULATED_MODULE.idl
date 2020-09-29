@@ -44,6 +44,11 @@ module SIMULATED_MODULE
 
     interface SimCentralControl : ACS::ACSComponent {
 
+
+    };   
+
+    interface SimResourceManager : ACS::ACSComponent {
+
         /** 
         * Ask the CC for the parameters to connect with ADH and receive data for a specific SB.
         *
