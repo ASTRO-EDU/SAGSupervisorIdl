@@ -32,6 +32,72 @@ Antonio Addis <antonio.addis@inaf.it>
 
 module SAG_MODULE
 {
+	
+
+	
+	interface SAGNotificationManager : ACS::ACSComponent {
+
+		/** 
+		*
+		* @param 
+		* @raise 
+		* @return 
+		*/        
+		void sendMessageToMON (in Types::ChannelEvent_TO_MON);
+
+		/** 
+		*
+		* @param 
+		* @raise 
+		* @return 
+		*/        
+		void sendMessageToADH (in Types::ChannelEvent_TO_ADH);
+
+		/** 
+		*
+		* @param 
+		* @raise 
+		* @return 
+		*/        
+		void sendMessageToCC (in Types::ChannelEvent_TO_CC);
+		
+		/** 
+		*
+		* @param 
+		* @raise 
+		* @return 
+		*/        
+		void sendMessageToRM (in Types::ChannelEvent_TO_RM);
+		
+		/** 
+		*
+		* @param 
+		* @raise 
+		* @return 
+		*/        
+		void sendMessageToHMI (in Types::ChannelEvent_TO_HMI);
+
+
+	};
+
+
+	interface SAGSubArrayMonitor : ACS::ACSComponent {
+
+
+	}
+
+    interface SAGDatabase : ACS::ACSComponent {
+
+        /** 
+        * 
+        *
+        * @param 
+        * @raise 
+        * @return 
+        */        
+        long getSubArrayIDFromSB(in long sbID);
+
+    };   
 
 	interface SAGSupervisor :  ACS::ACSComponent
 	{
@@ -193,6 +259,19 @@ module SAG_MODULE
 
 
 		/**
+		* Return monitoring data.
+		* @return long  
+		*
+		* TODO:
+		* The method should return a custom type with several informations. For now it has a dummy implementation. 
+		* This method should be inherited from SAGProcessStarter 
+		*/
+		TYPES::MonitoredParamsList getMonitoringInfo (in string compName)
+			raises(SAGErr::SAGGenericEx);
+
+
+
+		/**
 		* TBD 
 		* 
 		* @param sbID: the id of the Scheduling Block.
@@ -203,7 +282,14 @@ module SAG_MODULE
 		
 
 	};
-		
+
+	interface SAGProcessStarter : ACS::ACSComponent
+	{
+		// TODO
+		// This class has the responasbility to start/stop Linux processes and monitor their status
+		// SAGReco, SAGDataQuality and SAGSci must inherit from this class		
+	};
+
 	interface SAGReco : ACS::ACSComponent
 	{
 		
@@ -240,7 +326,18 @@ module SAG_MODULE
 		*/
 		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
-			
+
+		/**
+		* Return monitoring data.
+		* @return long  
+		*
+		* TODO:
+		* The method should return a custom type with several informations. For now it has a dummy implementation. 
+		* This method should be inherited from SAGProcessStarter 
+		*/
+		TYPES::MonitoredParamsList getMonitoringInfo()
+			raises(SAGErr::SAGGenericEx);
+
 	};
 
 	interface SAGDataQuality : ACS::ACSComponent
@@ -279,6 +376,19 @@ module SAG_MODULE
 		*/
 		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
+
+
+		/**
+		* Return monitoring data.
+		* @return long  
+		*
+		* TODO:
+		* The method should return a custom type with several informations. For now it has a dummy implementation. 
+		* This method should be inherited from SAGProcessStarter 
+		*/
+		TYPES::MonitoredParamsList getMonitoringInfo()
+			raises(SAGErr::SAGGenericEx);
+
 
 	};
 	
@@ -319,6 +429,18 @@ module SAG_MODULE
 		void stopDataProcessing ()
 			raises(SAGErr::SAGGenericEx);
 	
+
+		/**
+		* Return monitoring data.
+		* @return long  
+		*
+		* TODO:
+		* The method should return a custom type with several informations. For now it has a dummy implementation. 
+		* This method should be inherited from SAGProcessStarter 
+		*/
+		TYPES::MonitoredParamsList getMonitoringInfo()
+			raises(SAGErr::SAGGenericEx);
+
 	};
 
 };

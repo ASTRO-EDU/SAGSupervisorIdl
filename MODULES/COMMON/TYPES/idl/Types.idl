@@ -27,6 +27,81 @@ Antonio Addis <antonio.addis@inaf.it>
 module TYPES
 { 
 
+
+	// NOTIFICATION CHANNELS ----------------------------------------------- 
+
+	const string CHANNELNAME_MON = "mon";
+
+	struct ChannelEvent_FROM_MON {
+		string msg;
+		long value;
+	};
+	struct ChannelEvent_TO_MON {
+		string msg;
+		long value;
+	};
+
+
+	const string CHANNELNAME_ADH = "adh";
+
+	struct ChannelEvent_FROM_ADH {
+		string msg;
+		long value;
+	};
+	struct ChannelEvent_TO_ADH {
+		string msg;
+		long value;
+	};
+
+
+	const string CHANNELNAME_CC = "cc";
+
+	struct ChannelEvent_FROM_CC {
+		string msg;
+		long value;
+	};
+	struct ChannelEvent_TO_CC {
+		string msg;
+		long value;
+	};
+
+
+	const string CHANNELNAME_RM = "rm";
+
+	struct ChannelEvent_FROM_RM {
+		string msg;
+		long value;
+	};
+	struct ChannelEvent_TO_RM {
+		string msg;
+		long value;
+	};
+
+
+	const string CHANNELNAME_HMI = "hmi";
+
+	struct ChannelEvent_FROM_HMI {
+		string msg;
+		long value;
+	};
+	struct ChannelEvent_TO_HMI {
+		string msg;
+		long value;
+	};
+
+	// INTERNAL MONITORING -------------------------------------------------
+	
+	struct MonitoredParam {
+		string name;
+		double value;
+	};
+
+	typedef sequence<MonitoredParam> MonitoredParamsList;
+
+
+
+	// SAG TYPES ----------------------------------------------------------- 
+
 	struct Telescope {
 		string type; /* SST, MST, LST */
 	};
@@ -67,6 +142,8 @@ module TYPES
 		SubArray sbSubArray;
 		ObservationBlockList sbObservationBlockList;
 	};
+
+
 };
 
 

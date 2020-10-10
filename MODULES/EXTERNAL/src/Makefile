@@ -8,7 +8,7 @@
 #
 # who       when      what
 # --------  --------  ----------------------------------------------
-# almamgr  16/09/20  created
+# almamgr  09/10/20  created
 #
 
 # ALMA - Atacama Large Millimeter Array
@@ -133,8 +133,8 @@ CDB_SCHEMAS =
 # 
 # IDL Files and flags
 # 
-IDL_FILES = SIMULATED_MODULE
-SIMULATED_MODULEStubs_LIBS = acscomponentStubs TypesStubs
+IDL_FILES = EXTERNAL_MODULE
+EXTERNAL_MODULEStubs_LIBS = acscomponentStubs
 TAO_IDLFLAGS =
 USER_IDL =
 #
