@@ -51,7 +51,7 @@ module EXTERNAL_MODULE
 
     interface ArrayDataHandler : ACS::ACSComponent {
 
-        void simulateDataSend();
+        boolean simulateDataSend();
 
     };   
 
@@ -59,7 +59,12 @@ module EXTERNAL_MODULE
     interface HumanMachineInterface : ACS::ACSComponent {
 
 
-    };           
+    };   
+
+    interface Monitoring : ACS::ACSComponent {
+
+
+    };               
 };
  
 #endif

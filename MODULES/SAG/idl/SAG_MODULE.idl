@@ -43,7 +43,7 @@ module SAG_MODULE
 		* @raise 
 		* @return 
 		*/        
-		void sendMessageToMON (in Types::ChannelEvent_TO_MON);
+		void sendMessageToMON (in TYPES::ChannelEvent_TO_MON evt);
 
 		/** 
 		*
@@ -51,7 +51,7 @@ module SAG_MODULE
 		* @raise 
 		* @return 
 		*/        
-		void sendMessageToADH (in Types::ChannelEvent_TO_ADH);
+		void sendMessageToADH (in TYPES::ChannelEvent_TO_ADH evt);
 
 		/** 
 		*
@@ -59,7 +59,7 @@ module SAG_MODULE
 		* @raise 
 		* @return 
 		*/        
-		void sendMessageToCC (in Types::ChannelEvent_TO_CC);
+		void sendMessageToCC (in TYPES::ChannelEvent_TO_CC evt);
 		
 		/** 
 		*
@@ -67,7 +67,7 @@ module SAG_MODULE
 		* @raise 
 		* @return 
 		*/        
-		void sendMessageToRM (in Types::ChannelEvent_TO_RM);
+		void sendMessageToRM (in TYPES::ChannelEvent_TO_RM evt);
 		
 		/** 
 		*
@@ -75,7 +75,7 @@ module SAG_MODULE
 		* @raise 
 		* @return 
 		*/        
-		void sendMessageToHMI (in Types::ChannelEvent_TO_HMI);
+		void sendMessageToHMI (in TYPES::ChannelEvent_TO_HMI evt);
 
 
 	};
@@ -84,7 +84,7 @@ module SAG_MODULE
 	interface SAGSubArrayMonitor : ACS::ACSComponent {
 
 
-	}
+	};
 
     interface SAGDatabase : ACS::ACSComponent {
 
@@ -283,14 +283,14 @@ module SAG_MODULE
 
 	};
 
-	interface SAGProcessStarter : ACS::ACSComponent
+	interface SAGProcessStarter
 	{
 		// TODO
 		// This class has the responasbility to start/stop Linux processes and monitor their status
 		// SAGReco, SAGDataQuality and SAGSci must inherit from this class		
 	};
 
-	interface SAGReco : ACS::ACSComponent
+	interface SAGReco : ACS::ACSComponent, SAGProcessStarter
 	{
 		
 		/**
@@ -340,7 +340,7 @@ module SAG_MODULE
 
 	};
 
-	interface SAGDataQuality : ACS::ACSComponent
+	interface SAGDataQuality : ACS::ACSComponent, SAGProcessStarter
 	{
 
 		/**
@@ -392,7 +392,7 @@ module SAG_MODULE
 
 	};
 	
-	 interface SAGSci : ACS::ACSComponent
+	interface SAGSci : ACS::ACSComponent, SAGProcessStarter
 	{
 
 		/**
