@@ -34,12 +34,14 @@ module SAG_MODULE
 {
 	
 
-	
+	/**
+		This interface defines methods to send messages through ACS' notification channels. It is used internally within the SAG system.
+	*/
 	interface SAGNotificationManager : ACS::ACSComponent {
 
 		/** 
 		*
-		* @param 
+		* @param
 		* @raise 
 		* @return 
 		*/        
@@ -80,12 +82,17 @@ module SAG_MODULE
 
 	};
 
-
+	/**
+		This interface exposes methods to start/stop the internal monitoring of the SAG. It is used internally within the SAG system.
+	*/
 	interface SAGSubArrayMonitor : ACS::ACSComponent {
 
 
 	};
 
+	/**
+		This interface allows the communication with the SAG database. It is used internally within the SAG system.
+	*/
     interface SAGDatabase : ACS::ACSComponent {
 
         /** 
@@ -99,6 +106,10 @@ module SAG_MODULE
 
     };   
 
+
+	/**
+		This interface is the entry point to the SAG. External components MUST use this interface to interact with the SAG.
+	*/
 	interface SAGSupervisor :  ACS::ACSComponent
 	{
 
@@ -191,6 +202,9 @@ module SAG_MODULE
 		
 	};
 
+	/**
+		This interface manages subarray configurations. It is used internally within the SAG system.
+	*/
 	interface SAGSubArrayManager : ACS::ACSComponent
 	{
 
@@ -283,6 +297,9 @@ module SAG_MODULE
 
 	};
 
+	/**
+		TODO
+	*/
 	interface SAGProcessStarter
 	{
 		// TODO
@@ -290,6 +307,9 @@ module SAG_MODULE
 		// SAGReco, SAGDataQuality and SAGSci must inherit from this class		
 	};
 
+	/**
+		This interface is used to start RECO analysis processes. It is used internally within the SAG system.
+	*/
 	interface SAGReco : ACS::ACSComponent, SAGProcessStarter
 	{
 		
@@ -340,6 +360,9 @@ module SAG_MODULE
 
 	};
 
+	/**
+		This interface is used to start DQ analysis processes. It is used internally within the SAG system.
+	*/
 	interface SAGDataQuality : ACS::ACSComponent, SAGProcessStarter
 	{
 
@@ -392,6 +415,9 @@ module SAG_MODULE
 
 	};
 	
+	/**
+		This interface is used to start SCI analysis processes. It is used internally within the SAG system.
+	*/
 	interface SAGSci : ACS::ACSComponent, SAGProcessStarter
 	{
 
